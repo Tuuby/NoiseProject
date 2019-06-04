@@ -9,7 +9,7 @@ namespace NoiseTest
 {
     static class ColorHSV
     {
-        static public Color fromHSV(int hue, byte value, byte saturation)
+        static public Color fromHSV(int hue, byte saturation, byte value)
         {
             double r, g, b;
             double h, s, v;
@@ -18,7 +18,7 @@ namespace NoiseTest
             v = value / 100.0;
 
             double chroma = v * s;
-            double minimum = v - s;
+            double minimum = v - chroma;
             double x = chroma * (1 - Math.Abs((h / 60 % 2) - 1));
             chroma *= 255;
             minimum *= 255;
