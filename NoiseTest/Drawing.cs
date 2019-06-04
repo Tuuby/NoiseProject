@@ -36,12 +36,11 @@ namespace NoiseTest
                     moisture = map.getMoisture(x, y);
                     if (elevation <= map.getWaterlevel())
                     {
-                        col = ColorHSV.fromHSV(240, 100, (byte)(50 + elevation / 5.1));
-                        //col = System.Drawing.Color.FromArgb(255, 20, 0, (byte)((elevation / 255.0 * 205) + 50));
+                        col = ColorHSV.fromHSV(240, 100, (byte)(100 - (map.getWaterlevel() - elevation) / 2.55));
                     }
                     else
                     {
-                        col = System.Drawing.Color.FromArgb(255, elevation, moisture, 0);
+                        col = ColorHSV.fromHSV(100, (byte)(moisture / 2.55), (byte)(elevation / 2.55));
                     }
                     //Console.Write(col.ToString() + "\n");
                     bitmap.SetPixel(x, y, col);
