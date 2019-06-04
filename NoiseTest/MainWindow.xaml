@@ -9,5 +9,12 @@
     <Grid Height="800">
         <!--<Canvas x:Name="MapCanvas" HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="500"/>-->
         <Button x:Name="SeedRoll" Content="New Seed" HorizontalAlignment="Left" Margin="707,10,0,0" VerticalAlignment="Top" Width="75" Click="SeedRoll_Click"/>
+        <Slider x:Name ="Wasserlevel" HorizontalAlignment="Left" Margin="545,135,0,0" VerticalAlignment="Top" Width="237" ValueChanged="Wasserlevel_ValueChanged" Thumb.DragCompleted="Wasserlevel_DragCompleted" Maximum="255"/>
+        <TextBox x:Name ="wl" HorizontalAlignment="Left" Height="23" Margin="610,158,0,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" IsReadOnlyCaretVisible="True" KeyDown="Wl_KeyDown"/>
+        <Label Content="Wasserlevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="628,104,0,0"/>
+        <Slider x:Name="weedlevel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="239" Margin="537,228,0,0" ValueChanged="Weedlevel_ValueChanged" Thumb.DragCompleted="Weedlevel_DragCompleted" Maximum="255"/>
+        <Label Content="Weedlevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="628,210,0,0" Width="72"/>
+        <TextBox x:Name ="weed" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" Margin="610,254,0,0" IsReadOnlyCaretVisible="True" KeyDown="Weed_KeyDown"/>
+        <Image x:Name="mapView" HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="500"/>
     </Grid>
 </Window>

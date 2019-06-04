@@ -6,28 +6,30 @@ using System.Threading.Tasks;
 
 namespace NoiseTest
 {
-    class Map
+    public class Map
     {
         private int width = 10;
         private int height = 10;
         private byte[,] elevation;
         private float scale = 0.01f;
-        private byte waterlevel =  100;
-
-        public Map(int width, int height, int seed)
-        {
-            this.width = width;
-            this.height = height;
-            elevation = createArray();
-            Noise.Seed = seed;
-        }
+        private byte waterlevel = 0;
+        private byte weedlevel = 0;
 
         public Map(int width, int height)
         {
             this.width = width;
             this.height = height;
             elevation = createArray();
+            //Noise.Seed = seed;
+            
         }
+
+       /* public Map(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+            elevation = createArray();
+        }*/
 
         public Map(int seed)
         {
@@ -75,14 +77,24 @@ namespace NoiseTest
             return scale;
         }
 
-        public void setWaterlevel(byte level)
+        public void setWaterlevel(byte waterlevel)
         {
-            waterlevel = level;
+            this.waterlevel = waterlevel;
         }
 
         public byte getWaterlevel()
         {
             return waterlevel;
+        }
+
+        public void setWeedlevel(byte weedlevel)
+        {
+            this.weedlevel = weedlevel;
+        }
+
+        public byte getWeedlevel()
+        {
+            return weedlevel;
         }
 
         public void Generate()
