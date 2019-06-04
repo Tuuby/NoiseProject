@@ -19,42 +19,19 @@ namespace NoiseTest
 
         public MainWindow()
         {
+            int seed = rdm.Next();
+
+            map.setScale(5f);
+            map.setElevationSeed(seed);
+            seed = rdm.Next();
+            map.setMoistureSeed(seed);
+
             InitializeComponent();
-            map.Generate();
+            map.GenerateElevation();
+            map.GenerateMoisture();
             drawMap();
         }
-        /*
-        private void drawMap()
-        {
-            int seed = rdm.Next();
-            
-            map.setScale(5f);
-            map.setSeed(seed);
-
-            for (int x = 0; x < bitmap.Width; x++)
-            {
-                for (int y = 0; y < bitmap.Height; y++)
-                {
-                    byte elevation = map.getElevation(x, y);
-                    if (map.getElevation(x, y) <= map.getWaterlevel())
-                    {
-                        col = System.Drawing.Color.FromArgb(255, 0, 0, 100);
-                    }
-                    else if (map.getElevation(x,y) <= map.getWeedlevel())
-                    {
-                        col = System.Drawing.Color.FromArgb(255, 0, elevation, 0);
-                    }
-                    else
-                    {
-                        col = System.Drawing.Color.FromArgb(255, (byte)(32 + elevation / 1.14), (byte)(32 + elevation / 1.14), (byte)(32 + elevation / 1.14));
-                    }
-                    bitmap.SetPixel(x, y, col);
-                }
-            }
-            ImageSource imageSource = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            mapView.Source = imageSource;
-        }
-        */
+        
         public async void drawMap()
         {
             mapView.Source = await Drawing.Draw(map);
@@ -63,7 +40,13 @@ namespace NoiseTest
 
         private void SeedRoll_Click(object sender, RoutedEventArgs e)
         {
-            map.Generate();
+            int seed = rdm.Next();
+            map.setElevationSeed(seed);
+            seed = rdm.Next();
+            map.setMoistureSeed(seed);
+
+            map.GenerateElevation();
+            map.GenerateMoisture();
             drawMap();
         }
 
@@ -79,7 +62,8 @@ namespace NoiseTest
         {
             byte wert = (byte)(weedlevel.Value);
             weed.Text = wert.ToString();
-            map.setWeedlevel(wert);
+            //map.setWeedlevel(wert);
+            //drawMap();
         }
 
         private void Wasserlevel_DragCompleted(object sender, DragCompletedEventArgs e)
@@ -103,8 +87,10 @@ namespace NoiseTest
             }
         }
 
+        
         private void Weed_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            /*
             if (e.Key == System.Windows.Input.Key.Return)
             {
                 byte wert = (byte)Int32.Parse(weed.Text);
@@ -112,6 +98,8 @@ namespace NoiseTest
                 weedlevel.Value = wert;
                 drawMap();
             }
+            */
         }
+        
     }
 }

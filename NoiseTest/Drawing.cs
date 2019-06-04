@@ -18,30 +18,32 @@ namespace NoiseTest
             Random rdm = new Random();
             Bitmap bitmap = new Bitmap(500, 500);
             System.Drawing.Color col = new System.Drawing.Color();
+            byte elevation;
+            byte moisture;
 
             int seed = rdm.Next();
 
             map.setScale(5f);
-            map.setSeed(seed);
+            map.setElevationSeed(seed);
+            seed = rdm.Next();
+            map.setMoistureSeed(seed);
 
             for (int x = 0; x < bitmap.Width; x++)
             {
                 for (int y = 0; y < bitmap.Height; y++)
                 {
-                    byte elevation = map.getElevation(x, y);
-                    if (map.getElevation(x, y) <= map.getWaterlevel()) //blau
+                    elevation = map.getElevation(x, y);
+                    moisture = map.getMoisture(x, y);
+                    if (elevation <= map.getWaterlevel())
                     {
-                        col = System.Drawing.Color.FromArgb(255, 0, 0, 100);
-                        //col = System.Drawing.Color.
+                        col = ColorHSV.fromHSV(240, (byte)(elevation / 2.55), 100);
+                        //col = System.Drawing.Color.FromArgb(255, 20, 0, (byte)((elevation / 255.0 * 205) + 50));
                     }
-                    else if (map.getElevation(x, y) <= map.getWeedlevel()) //grün
+                    else
                     {
-                        col = System.Drawing.Color.FromArgb(255, 0, elevation, 0);
+                        col = System.Drawing.Color.FromArgb(255, elevation, moisture, 0);
                     }
-                    else //Graustufe (ungefärbt)
-                    {
-                        col = System.Drawing.Color.FromArgb(255, (byte)(32 + elevation / 1.14), (byte)(32 + elevation / 1.14), (byte)(32 + elevation / 1.14));
-                    }
+                    //Console.Write(col.ToString() + "\n");
                     bitmap.SetPixel(x, y, col);
                 }
             }
