@@ -9,12 +9,13 @@
     <Grid Height="800">
         <!--<Canvas x:Name="MapCanvas" HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="500"/>-->
         <Button x:Name="SeedRoll" Content="New Seed" HorizontalAlignment="Left" Margin="707,10,0,0" VerticalAlignment="Top" Width="75" Click="SeedRoll_Click"/>
-        <Slider x:Name ="Wasserlevel" HorizontalAlignment="Left" Margin="545,135,0,0" VerticalAlignment="Top" Width="237" ValueChanged="Wasserlevel_ValueChanged" Thumb.DragCompleted="Wasserlevel_DragCompleted" Maximum="255"/>
-        <TextBox x:Name ="wl" HorizontalAlignment="Left" Height="23" Margin="610,158,0,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" IsReadOnlyCaretVisible="True" KeyDown="Wl_KeyDown"/>
-        <Label Content="Wasserlevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="628,104,0,0"/>
-        <Slider x:Name="weedlevel" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="239" Margin="537,228,0,0" ValueChanged="Weedlevel_ValueChanged" Thumb.DragCompleted="Weedlevel_DragCompleted" Maximum="255"/>
-        <Label Content="Weedlevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="628,210,0,0" Width="72"/>
-        <TextBox x:Name ="weed" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" Margin="610,254,0,0" IsReadOnlyCaretVisible="True" KeyDown="Weed_KeyDown"/>
+        <Grid Margin="545,109,10,425">
+            <Slider x:Name ="Wasserlevel" Margin="0,26,0,0" VerticalAlignment="Top" Width="237" ValueChanged="Wasserlevel_ValueChanged" Thumb.DragCompleted="Wasserlevel_DragCompleted" Maximum="255" HorizontalAlignment="Center"/>
+            <TextBox x:Name ="wl" Height="23" Margin="0,49,0,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" IsReadOnlyCaretVisible="True" KeyDown="Wl_KeyDown" HorizontalAlignment="Center"/>
+            <Label Content="Wasserlevel" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="87" HorizontalAlignment="Center"/>
+            <Label Content="Skalierung" HorizontalAlignment="Center" Margin="82,88,83,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.512,0.5" HorizontalContentAlignment="Center"/>
+            <Slider x:Name="Skalierungslevel" HorizontalAlignment="Center" Margin="-4,119,0,0" VerticalAlignment="Top" Width="241"/>
+        </Grid>
         <Image x:Name="mapView" HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="500"/>
     </Grid>
 </Window>

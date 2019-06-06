@@ -11,7 +11,6 @@ namespace NoiseTest
     {
         static public Color fromHSV(int hue, byte saturation, byte value)
         {
-            double r, g, b;
             double h, s, v;
             h = hue;
             s = saturation / 100.0;

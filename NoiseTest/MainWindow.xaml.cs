@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls.Primitives;
+using System.Threading.Tasks;
 
 namespace NoiseTest
 {
@@ -58,20 +59,7 @@ namespace NoiseTest
             map.setWaterlevel(wert);
         }
 
-        private void Weedlevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            byte wert = (byte)(weedlevel.Value);
-            weed.Text = wert.ToString();
-            //map.setWeedlevel(wert);
-            //drawMap();
-        }
-
         private void Wasserlevel_DragCompleted(object sender, DragCompletedEventArgs e)
-        {
-            drawMap();
-        }
-
-        private void Weedlevel_DragCompleted(object sender, DragCompletedEventArgs e)
         {
             drawMap();
         }
@@ -87,19 +75,9 @@ namespace NoiseTest
             }
         }
 
-        
-        private void Weed_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Skalierungslevel1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            /*
-            if (e.Key == System.Windows.Input.Key.Return)
-            {
-                byte wert = (byte)Int32.Parse(weed.Text);
-                map.setWeedlevel(wert);
-                weedlevel.Value = wert;
-                drawMap();
-            }
-            */
+
         }
-        
     }
 }

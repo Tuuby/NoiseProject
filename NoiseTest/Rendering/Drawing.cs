@@ -13,7 +13,7 @@ namespace NoiseTest
 {
     static public class Drawing
     {
-        static public async Task<ImageSource> Draw(Map map)
+        static public Task<ImageSource> Draw(Map map)
         {
             Random rdm = new Random();
             Bitmap bitmap = new Bitmap(500, 500);
@@ -48,7 +48,9 @@ namespace NoiseTest
             }
 
             ImageSource imageSource = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            return imageSource;
+            TaskCompletionSource<ImageSource> tcs = new TaskCompletionSource<ImageSource>();
+            tcs.SetResult(imageSource);
+            return tcs.Task;
         }
     }
 }

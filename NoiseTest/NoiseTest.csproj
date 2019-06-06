@@ -64,8 +64,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ColorHSV.cs" />
-    <Compile Include="Drawing.cs" />
+    <Compile Include="Rendering\ColorHSV.cs" />
+    <Compile Include="Rendering\Drawing.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
