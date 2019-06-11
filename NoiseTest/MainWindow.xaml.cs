@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Media;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
@@ -34,9 +35,10 @@ namespace NoiseTest
             drawMap();
         }
         
-        public async void drawMap()
+        public void drawMap()
         {
-            mapView.Source = await Drawing.Draw(map);
+            bitmap = Drawing.Draw(map);
+            mapView.Source = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
 
 
@@ -69,12 +71,25 @@ namespace NoiseTest
             {
                 if (IsNumberPositiv(wl.Text)) // equals a positiv number
                 {
-                    byte wert = (byte)Int32.Parse(wl.Text);
-                    map.setWaterlevel(wert);
-                    Wasserlevel.Value = wert;
-                    drawMap();
+                    byte wert;
+                    if (Byte.TryParse(wl.Text, out wert))
+                    {
+                        //byte wert = Byte.Parse(wl.Text);
+                        map.setWaterlevel(wert);
+                        Wasserlevel.Value = wert;
+                        drawMap();
+                    }
+                    else
+                    {
+                        wl.Text = "0";
+                        MessageBox.Show("Die eingegebene Zahl ist zu groß", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                else wl.Text = "0";
+                else
+                {
+                    wl.Text = "0";
+                    MessageBox.Show("Dieses Feld akzeptiert nur positive Zahlen", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -85,9 +100,27 @@ namespace NoiseTest
 
         private void GenerierKarte_Click(object sender, RoutedEventArgs e)
         {
-            map.GenerateElevation();
-            map.GenerateMoisture();
-            drawMap();
+            if (IsNumberPositiv(SeedEingabe.Text)) // equals a positiv number
+            {
+                int seed;
+                if (Int32.TryParse(SeedEingabe.Text, out seed))
+                {
+                    map.setElevationSeed(seed);
+                    map.GenerateElevation();
+                    map.GenerateMoisture();
+                    drawMap();
+                }
+                else
+                {
+                    SeedEingabe.Text = "0";
+                    MessageBox.Show("Die eingegebene Zahl ist zu groß", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                SeedEingabe.Text = "0";
+                MessageBox.Show("Dieses Feld akzeptiert nur positive Zahlen", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void SeedEingabe_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -97,10 +130,25 @@ namespace NoiseTest
             {
                 if (IsNumberPositiv(SeedEingabe.Text)) // equals a positiv number
                 {
-                    int seed = Int32.Parse(SeedEingabe.Text);
-                    map.setElevationSeed(seed);
+                    int seed;
+                    if (Int32.TryParse(SeedEingabe.Text, out seed))
+                    {
+                        map.setElevationSeed(seed);
+                        map.GenerateElevation();
+                        map.GenerateMoisture();
+                        drawMap();
+                    }
+                    else
+                    {
+                        SeedEingabe.Text = "0";
+                        MessageBox.Show("Die eingegebene Zahl ist zu groß", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-                else SeedEingabe.Text = "0";// + Fehlermeldung
+                else
+                {
+                    SeedEingabe.Text = "0";
+                    MessageBox.Show("Dieses Feld akzeptiert nur positive Zahlen", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

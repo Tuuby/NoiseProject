@@ -13,7 +13,7 @@ namespace NoiseTest
 {
     static public class Drawing
     {
-        static public Task<ImageSource> Draw(Map map)
+        static public Bitmap Draw(Map map)
         {
             Bitmap bitmap = new Bitmap(500, 500);
             System.Drawing.Color col = new System.Drawing.Color();
@@ -39,10 +39,10 @@ namespace NoiseTest
                 }
             }
 
-            ImageSource imageSource = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            TaskCompletionSource<ImageSource> tcs = new TaskCompletionSource<ImageSource>();
-            tcs.SetResult(imageSource);
-            return tcs.Task;
+            //ImageSource imageSource = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            //TaskCompletionSource<ImageSource> tcs = new TaskCompletionSource<ImageSource>();
+            //tcs.SetResult(imageSource);
+            return bitmap;
         }
     }
 }
