@@ -15,18 +15,10 @@ namespace NoiseTest
     {
         static public Task<ImageSource> Draw(Map map)
         {
-            Random rdm = new Random();
             Bitmap bitmap = new Bitmap(500, 500);
             System.Drawing.Color col = new System.Drawing.Color();
             byte elevation;
             byte moisture;
-
-            int seed = rdm.Next();
-
-            map.setScale(5f);
-            map.setElevationSeed(seed);
-            seed = rdm.Next();
-            map.setMoistureSeed(seed);
 
             for (int x = 0; x < bitmap.Width; x++)
             {

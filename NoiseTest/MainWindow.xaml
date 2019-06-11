@@ -5,17 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoiseTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
-    <Grid Height="800">
+        Title="MainWindow" Height="800" Width="852.5">
+    <Grid Height="800" Margin="0,0,2,-31">
         <!--<Canvas x:Name="MapCanvas" HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="500"/>-->
-        <Button x:Name="SeedRoll" Content="New Seed" HorizontalAlignment="Left" Margin="707,10,0,0" VerticalAlignment="Top" Width="75" Click="SeedRoll_Click"/>
-        <Grid Margin="545,109,10,425">
-            <Slider x:Name ="Wasserlevel" Margin="0,26,0,0" VerticalAlignment="Top" Width="237" ValueChanged="Wasserlevel_ValueChanged" Thumb.DragCompleted="Wasserlevel_DragCompleted" Maximum="255" HorizontalAlignment="Center"/>
-            <TextBox x:Name ="wl" Height="23" Margin="0,49,0,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" IsReadOnlyCaretVisible="True" KeyDown="Wl_KeyDown" HorizontalAlignment="Center"/>
+        <Grid Margin="10,10,579,727">
+            <Button x:Name="SeedRoll" Content="New Seed" HorizontalAlignment="Left" Margin="179,3,0,0" VerticalAlignment="Top" Width="75" Click="SeedRoll_Click"/>
+            <TextBox x:Name="SeedEingabe" HorizontalAlignment="Left" Height="23" Margin="54,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="111" KeyDown="SeedEingabe_KeyDown"/>
+            <Label Content="Seed:" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="39"/>
+            <Button x:Name="GenerierKarte" Content="Generieren" HorizontalAlignment="Left" Height="26" Margin="61,37,0,0" VerticalAlignment="Top" Width="111" Click="GenerierKarte_Click"/>
+        </Grid>
+        <Grid Margin="10,113,545,421" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Slider x:Name ="Wasserlevel" Margin="0,26,0,0" VerticalAlignment="Top" Width="237" ValueChanged="Wasserlevel_ValueChanged" Thumb.DragCompleted="Wasserlevel_DragCompleted" Maximum="255" HorizontalAlignment="Center" TickPlacement="BottomRight" TickFrequency="100" Ticks="25 50 75 100"/>
+            <TextBox x:Name ="wl" Height="23" Margin="58,50,59,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" KeyDown="Wl_KeyDown" HorizontalAlignment="Center" IsReadOnlyCaretVisible="True"/>
             <Label Content="Wasserlevel" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="87" HorizontalAlignment="Center"/>
             <Label Content="Skalierung" HorizontalAlignment="Center" Margin="82,88,83,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.512,0.5" HorizontalContentAlignment="Center"/>
-            <Slider x:Name="Skalierungslevel" HorizontalAlignment="Center" Margin="-4,119,0,0" VerticalAlignment="Top" Width="241"/>
+            <Slider x:Name="Skalierungslevel" HorizontalAlignment="Center" Margin="0,119,-4,0" VerticalAlignment="Top" Width="241" TickPlacement="BottomRight" Ticks="1 2 3 4 5 6 7 8 9 10"/>
         </Grid>
-        <Image x:Name="mapView" HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="500"/>
+        <Image x:Name="mapView" HorizontalAlignment="Right" Height="500" VerticalAlignment="Top" Width="500" Margin="0,10,10,0"/>
     </Grid>
 </Window>
