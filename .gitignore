@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 .vs
 NoiseTest/obj
+=======
+/.vs/
+>>>>>>> Add git ignore rule for .vs
