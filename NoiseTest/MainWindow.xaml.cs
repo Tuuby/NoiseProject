@@ -155,5 +155,18 @@ namespace NoiseTest
             if (rgx.IsMatch(numberStr)) return true;
             return false;
         }
+
+        private void Skalierungslevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            double wert = e.NewValue;
+            map.setScale((float)wert);
+        }
+
+        private void Skalierungslevel_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            map.GenerateElevation();
+            map.GenerateMoisture();
+            drawMap();
+        }
     }
 }
