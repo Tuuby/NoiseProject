@@ -5,6 +5,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls.Primitives;
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
 
 namespace NoiseTest
 {
@@ -154,6 +155,17 @@ namespace NoiseTest
             Regex rgx = new Regex(@"^\d+$");
             if (rgx.IsMatch(numberStr)) return true;
             return false;
+        }
+
+        private void Button_Speichern_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            // saveFileDialog.Filter = "Name in der List | Dateiformat";
+            saveFileDialog.Filter = "Bitmap (*.BMP)|*.BMP |JPG-Image (*.JPG)|*.JPG |Portable Network Grafic (*.PNG)|*.PNG |Graphics Interchange Format (*.GIF)|*.GIF";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.DefaultExt = "bmp";
+            if (saveFileDialog.ShowDialog() == true)
+                bitmap.Save(saveFileDialog.FileName);
         }
     }
 }
