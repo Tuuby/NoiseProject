@@ -52,7 +52,7 @@ namespace NoiseTest
 
         private void Wasserlevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            byte wert = (byte)(Wasserlevel.Value);
+            byte wert = (byte)e.NewValue;
             wl.Text = wert.ToString();
             map.setWaterlevel(wert);
         }
@@ -88,11 +88,6 @@ namespace NoiseTest
                     MessageBox.Show("Dieses Feld akzeptiert nur positive Zahlen", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }
-
-        private void Skalierungslevel1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
         }
 
         private void GenerierKarte_Click(object sender, RoutedEventArgs e)
@@ -159,6 +154,7 @@ namespace NoiseTest
         private void Skalierungslevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double wert = e.NewValue;
+            Skalierung_Textbox.Text = String.Format("{0:N2}", wert);
             map.setScale((float)wert);
         }
 
@@ -167,6 +163,27 @@ namespace NoiseTest
             map.GenerateElevation();
             map.GenerateMoisture();
             drawMap();
+        }
+
+        private void Skalierung_Textbox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Return)
+            {
+                double scale;
+                if (Double.TryParse(Skalierung_Textbox.Text, out scale))
+                {
+                    if (scale >= 1 && scale <= 5)
+                    {
+                        map.setScale((float)scale);
+                        map.GenerateElevation();
+                        map.GenerateMoisture();
+                        drawMap();
+                    } else
+                    {
+                        Skalierung_Textbox.Text = "Nur Zahlen zwischen 1 und 5";
+                    }
+                }
+            }
         }
     }
 }

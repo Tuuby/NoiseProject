@@ -142,10 +142,10 @@ namespace NoiseTest
             {
                 for (int y = 0; y < height; y++)
                 {
-                    double mo = (Noise.CalcPixel2D(x, y, 0.5f * scale)
-                                    + 0.5 * Noise.CalcPixel2D(x, y, 2 * scale)
-                                    + 0.25 * Noise.CalcPixel2D(x, y, 4 * scale)) / 1.75;    //1.75 ist wichtig um innerhalb der Grenzen eines Bytes zu bleiben
-                    moisture[x, y] = (byte)(Math.Pow(mo, 2) / 255);
+                    double mo = Noise.CalcPixel2D(x, y, 0.5f * scale)
+                                   /* + 0.5 * Noise.CalcPixel2D(x, y, 2 * scale)
+                                    + 0.25 * Noise.CalcPixel2D(x, y, 4 * scale)) / 1.75*/;    //1.75 ist wichtig um innerhalb der Grenzen eines Bytes zu bleiben
+                    moisture[x, y] = (byte)mo;
                 }
             }
         }
