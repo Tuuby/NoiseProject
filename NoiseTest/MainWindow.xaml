@@ -28,5 +28,6 @@
             <TextBox x:Name ="Skalierung_Textbox" Height="23" Margin="58,148,59,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" KeyDown="Skalierung_Textbox_KeyDown" HorizontalAlignment="Center" IsReadOnlyCaretVisible="True"/>
             <Slider x:Name="Skalierungslevel" HorizontalAlignment="Center" Margin="0,119,-4,0" VerticalAlignment="Top" Width="241" TickPlacement="BottomRight" Ticks="1 2 3 4 5 6 7 8 9 10" ValueChanged="Skalierungslevel_ValueChanged" Thumb.DragCompleted="Skalierungslevel_DragCompleted" Maximum="5" Minimum="1"/>
         </Grid>
+        <Button x:Name="Button_Speichern" Content="Speichern" HorizontalAlignment="Left" Margin="40,393,0,0" VerticalAlignment="Top" Width="128" Click="Button_Speichern_Click"/>
     </Grid>
 </Window>

@@ -5,6 +5,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls.Primitives;
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
 
 namespace NoiseTest
 {
@@ -162,7 +163,6 @@ namespace NoiseTest
             if (rgx.IsMatch(numberStr)) return true;
             return false;
         }
-
         private void Skalierungslevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double wert = e.NewValue;
@@ -226,6 +226,17 @@ namespace NoiseTest
         {
             map.GenerateElevation();
             drawMap();
+        }
+
+        private void Button_Speichern_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            // saveFileDialog.Filter = "Name in der List | Dateiformat";
+            saveFileDialog.Filter = "Bitmap (*.BMP)|*.BMP |JPG-Image (*.JPG)|*.JPG |Portable Network Grafic (*.PNG)|*.PNG |Graphics Interchange Format (*.GIF)|*.GIF";
+            saveFileDialog.FilterIndex = 1;
+            saveFileDialog.DefaultExt = "bmp";
+            if (saveFileDialog.ShowDialog() == true)
+                bitmap.Save(saveFileDialog.FileName);
         }
     }
 }
