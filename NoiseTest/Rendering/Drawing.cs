@@ -17,14 +17,14 @@ namespace NoiseTest
         {
             Bitmap bitmap = new Bitmap(500, 500);
             System.Drawing.Color col = new System.Drawing.Color();
-            byte elevation;
+            byte elevation; // <- the compressed Elevation 
             byte moisture;
 
             for (int x = 0; x < bitmap.Width; x++)
             {
                 for (int y = 0; y < bitmap.Height; y++)
                 {
-                    elevation = map.getElevation(x, y);
+                    elevation = map.getCompressedElevation(x, y);
                     moisture = map.getMoisture(x, y);
                     if (elevation <= map.getWaterlevel())
                     {
