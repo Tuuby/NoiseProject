@@ -6,6 +6,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls.Primitives;
 using System.Threading.Tasks;
+using NoiseTest.Rendering;
 
 // Klasse nur mit Funktionen ? Ansosnten: Objekt von Klasse Drawing insatnziieren in MainWindow und dann Methode aufrufen
 
@@ -20,19 +21,35 @@ namespace NoiseTest
             byte elevation; // <- the compressed Elevation 
             byte moisture;
 
+
+            Biom OCEAN = new Biom(240, 100);
+            Biom BEACH = new Biom(40, 75);
+            Biom GRASS = new Biom(100, 80);
+            Biom DESERT = new Biom(60, 75);
+            //Biom Tundra = new Biom();
+            //Biom SWAMP = new Biom();
+
+
             for (int x = 0; x < bitmap.Width; x++)
             {
                 for (int y = 0; y < bitmap.Height; y++)
                 {
                     elevation = map.getCompressedElevation(x, y);
                     moisture = map.getMoisture(x, y);
-                    if (elevation <= map.getWaterlevel())
+                    if (elevation <= map.getWaterlevel()) // OCEAN
                     {
-                        col = ColorHSV.fromHSV(240, 100, (byte)(100 - (map.getWaterlevel() - elevation) / 2.55));
+                        col = ColorHSV.fromHSV(OCEAN.hue, OCEAN.saturation, (byte)(100 - (map.getWaterlevel() - elevation) / 2.55));
+                    }
+                    else if (elevation <= map.getWaterlevel() + 15) // BEACH a little above OCEAN
+                    {
+                        col = ColorHSV.fromHSV(BEACH.hue, BEACH.saturation, (byte)(elevation / 2.55));
                     }
                     else
                     {
-                        col = ColorHSV.fromHSV(100, (byte)(moisture / 2.55), (byte)(elevation / 2.55));
+                        if (moisture >= 200)
+                            col = ColorHSV.fromHSV(DESERT.hue, DESERT.saturation, (byte)(elevation / 2.55));
+                        else
+                            col = ColorHSV.fromHSV(GRASS.hue, GRASS.saturation, (byte)(elevation / 2.55));
                     }
                     //Console.Write(col.ToString() + "\n");
                     bitmap.SetPixel(x, y, col);

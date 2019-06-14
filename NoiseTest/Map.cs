@@ -80,7 +80,7 @@ namespace NoiseTest
         }
 
         // gibt das gesamte Array elevation zurück
-        public byte[,] getCOmpressedElevation()
+        public byte[,] getCompressedElevation()
         {
             return compressedElevation;
         }
@@ -173,7 +173,6 @@ namespace NoiseTest
             {
                 for(int y = 0; y < height; y++)
                 {
-                    compressedElevation[x, y] = elevation[x, y];
                     compressedElevation[x, y] = (byte) (elevation[x, y] / divisor);
                 }
             }
