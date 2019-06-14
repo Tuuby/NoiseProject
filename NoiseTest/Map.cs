@@ -12,6 +12,7 @@ namespace NoiseTest
         private int elevationSeed;
         private int moistureSeed;
         private byte[,] elevation;
+        private byte[,] compressedElevation;
         private byte[,] moisture;
         private float scale = 0.01f;
         private byte waterlevel = 0;
@@ -22,12 +23,14 @@ namespace NoiseTest
             this.width = width;
             this.height = height;
             elevation = createArray();
+            compressedElevation = createArray();
             moisture = createArray();
         }
 
         public Map(int seed)
         {
             elevation = createArray();
+            compressedElevation = createArray();
             moisture = createArray();
             elevationSeed = seed;
         }
@@ -35,6 +38,7 @@ namespace NoiseTest
         public Map()
         {
             elevation = createArray();
+            compressedElevation = createArray();
             moisture = createArray();
         }
 
@@ -64,6 +68,18 @@ namespace NoiseTest
         public byte[,] getElevation()
         {
             return elevation;
+        }
+
+        // gibt den Höhenwert eines einzelnen Punktes im Array zurück
+        public byte getCompressedElevation(int x, int y)
+        {
+            return compressedElevation[x, y];
+        }
+
+        // gibt das gesamte Array elevation zurück
+        public byte[,] getCOmpressedElevation()
+        {
+            return compressedElevation;
         }
 
         // gibt den Höhenwert eines einzelnen Punktes im Array zurück
@@ -152,6 +168,7 @@ namespace NoiseTest
                                     + 0.5 * Noise.CalcPixel2D(x, y, 2 * scale)
                                     + 0.25 * Noise.CalcPixel2D(x, y, 4 * scale)) / 1.75;    //1.75 ist wichtig um innerhalb der Grenzen eines Bytes zu bleiben
                     elevation[x, y] = (byte)(Math.Pow(el, 2) / 255);
+                    compressedElevation[x, y] = elevation[x, y];
                 }
             }
         }
@@ -168,6 +185,18 @@ namespace NoiseTest
                                    /* + 0.5 * Noise.CalcPixel2D(x, y, 2 * scale)
                                     + 0.25 * Noise.CalcPixel2D(x, y, 4 * scale)) / 1.75*/;    //1.75 ist wichtig um innerhalb der Grenzen eines Bytes zu bleiben
                     moisture[x, y] = (byte)mo;
+                }
+            }
+        }
+
+        public void compressingElevation (double divisor)
+        {
+            for(int x = 0; x < width; x++)
+            {
+                for(int y = 0; y < height; y++)
+                {
+                    compressedElevation[x, y] = elevation[x, y];
+                    compressedElevation[x, y] = (byte) (elevation[x, y] / divisor);
                 }
             }
         }

@@ -232,11 +232,61 @@ namespace NoiseTest
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             // saveFileDialog.Filter = "Name in der List | Dateiformat";
-            saveFileDialog.Filter = "Bitmap (*.BMP)|*.BMP |JPG-Image (*.JPG)|*.JPG |Portable Network Grafic (*.PNG)|*.PNG |Graphics Interchange Format (*.GIF)|*.GIF";
+            saveFileDialog.Filter = "Bitmap (*.BMP)|*.BMP |JPG-Image (*.JPG)|*.JPG |Portable Network Grafic (*.PNG)|*.PNG |Graphics Interchange Format (*.GIF)|*.GIF"+ 
+                                    "|Portable Document Format (*.PDF)|*.PDF";
             saveFileDialog.FilterIndex = 1;
             saveFileDialog.DefaultExt = "bmp";
             if (saveFileDialog.ShowDialog() == true)
                 bitmap.Save(saveFileDialog.FileName);
+        }
+
+        private void Slider_GebirgeStauchen_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            map.compressingElevation(Slider_GebirgeStauchen.Value);
+            drawMap();
+        }
+
+        private void TextBox_GebirgeStauchen_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Return)
+            {
+                if (IsNumberPositiv(TextBox_GebirgeStauchen.Text))
+                {
+                    int divisor;
+                    if (Int32.TryParse(TextBox_GebirgeStauchen.Text, out divisor))
+                    {
+                        if(divisor >= Slider_GebirgeStauchen.Minimum && divisor <= Slider_GebirgeStauchen.Maximum)
+                        {
+                            map.compressingElevation(divisor);
+                            Slider_GebirgeStauchen.Value = divisor;
+                            drawMap();
+                        }
+                        else 
+                        {
+                            TextBox_GebirgeStauchen.Text = "1";
+                            Slider_GebirgeStauchen.Value = 1;
+                            MessageBox.Show("Die eingegebene Zahl muss im Intervall von " + Slider_GebirgeStauchen.Minimum + 
+                                            " bis " + Slider_GebirgeStauchen.Maximum + " sein", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        TextBox_GebirgeStauchen.Text = "1";
+                        MessageBox.Show("Die eingegebene Zahl ist zu groß", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    TextBox_GebirgeStauchen.Text = "1";
+                    MessageBox.Show("Dieses Feld akzeptiert nur positive Zahlen", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void Slider_GebirgeStauchen_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            byte wert = (byte)(e.NewValue);
+            TextBox_GebirgeStauchen.Text = wert.ToString();
         }
     }
 }
