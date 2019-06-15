@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NoiseTest.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace NoiseTest
 {
     static class ColorHSV
     {
-        static public Color fromHSV(int hue, byte saturation, byte value)
+        static public Color fromHSV(Biom biom, byte value) // hue and saturation information in Struct Biom
         {
             double h, s, v;
-            h = hue;
-            s = saturation / 100.0;
+            h = biom.hue;
+            s = biom.saturation / 100.0;
             v = value / 100.0;
 
             double chroma = v * s;

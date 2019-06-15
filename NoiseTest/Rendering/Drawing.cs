@@ -8,8 +8,6 @@ using System.Windows.Controls.Primitives;
 using System.Threading.Tasks;
 using NoiseTest.Rendering;
 
-// Klasse nur mit Funktionen ? Ansosnten: Objekt von Klasse Drawing insatnziieren in MainWindow und dann Methode aufrufen
-
 namespace NoiseTest
 {
     static public class Drawing
@@ -24,10 +22,11 @@ namespace NoiseTest
 
             Biom OCEAN = new Biom(240, 100);
             Biom BEACH = new Biom(40, 75);
-            Biom GRASS = new Biom(100, 80);
+            Biom GRASS = new Biom(100, 90);
             Biom DESERT = new Biom(60, 75);
             //Biom Tundra = new Biom();
-            //Biom SWAMP = new Biom();
+            Biom SWAMP = new Biom(85, 80);
+            Biom MOUNTAIN = new Biom(0, 0);
 
 
             for (int x = 0; x < bitmap.Width; x++)
@@ -37,21 +36,21 @@ namespace NoiseTest
                     elevation = map.getCompressedElevation(x, y);
                     moisture = map.getMoisture(x, y);
                     if (elevation <= map.getWaterlevel()) // OCEAN
-                    {
-                        col = ColorHSV.fromHSV(OCEAN.hue, OCEAN.saturation, (byte)(100 - (map.getWaterlevel() - elevation) / 2.55));
-                    }
+                        col = ColorHSV.fromHSV(OCEAN, (byte)(100 - (map.getWaterlevel() - elevation) / 2.55));
                     else if (elevation <= map.getWaterlevel() + 15) // BEACH a little above OCEAN
+                        col = ColorHSV.fromHSV(BEACH, (byte)(elevation / 2.55));
+                    else if (elevation < 170)
                     {
-                        col = ColorHSV.fromHSV(BEACH.hue, BEACH.saturation, (byte)(elevation / 2.55));
+                        if (moisture < 30)
+                            col = ColorHSV.fromHSV(DESERT, (byte)(elevation / 2.55));
+                        else if (moisture > 170)
+                            col = ColorHSV.fromHSV(SWAMP, (byte)(elevation / 2.55));
+                        else
+                            col = ColorHSV.fromHSV(GRASS, (byte)(elevation / 2.55));
                     }
                     else
-                    {
-                        if (moisture >= 200)
-                            col = ColorHSV.fromHSV(DESERT.hue, DESERT.saturation, (byte)(elevation / 2.55));
-                        else
-                            col = ColorHSV.fromHSV(GRASS.hue, GRASS.saturation, (byte)(elevation / 2.55));
-                    }
-                    //Console.Write(col.ToString() + "\n");
+                        col = ColorHSV.fromHSV(MOUNTAIN, 40);
+
                     bitmap.SetPixel(x, y, col);
                 }
             }
