@@ -24,9 +24,9 @@
             <Label Content="Wasserlevel" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="87" HorizontalAlignment="Center"/>
             <Label Content="Skalierung" HorizontalAlignment="Center" Margin="76,201,89,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.512,0.5" HorizontalContentAlignment="Center"/>
             <Slider x:Name="Skalierungslevel" HorizontalAlignment="Center" Margin="0,232,-4,0" VerticalAlignment="Top" Width="241" TickPlacement="BottomRight" Ticks="1 2 3 4 5 6 7 8 9 10"/>
-            <Label x:Name="GebirgeStauchen" Content="Gebirge Stauchen" HorizontalAlignment="Left" Height="26" Margin="68,113,0,0" VerticalAlignment="Top" Width="114"/>
-            <TextBox x:Name="TextBox_GebirgeStauchen" HorizontalAlignment="Left" Height="23" Margin="58,167,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyDown="TextBox_GebirgeStauchen_KeyDown"/>
-            <Slider x:Name="Slider_GebirgeStauchen" HorizontalAlignment="Left" Margin="0,141,0,0" VerticalAlignment="Top" Width="237" TickPlacement="BottomRight" ValueChanged="Slider_GebirgeStauchen_ValueChanged" Thumb.DragCompleted="Slider_GebirgeStauchen_DragCompleted" Minimum="1"/>
+            <Label Content="Weedlevel" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Height="26" Margin="64,107,59,0" VerticalAlignment="Top" Width="114"/>
+            <TextBox x:Name="TextBox_Weedlevel" HorizontalAlignment="Left" Height="23" Margin="58,167,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyDown="TextBox_Weedlevel_KeyDown"/>
+            <Slider x:Name="Slider_Weedlevel" HorizontalAlignment="Center" Margin="0,138,0,0" VerticalAlignment="Top" Width="237" TickPlacement="BottomRight" ValueChanged="Slider_Weedlevel_ValueChanged" Thumb.DragCompleted="Slider_Weedlevel_DragCompleted" Maximum="255" TickFrequency="100"/>
         </Grid>
         <Image x:Name="mapView" HorizontalAlignment="Right" Height="500" VerticalAlignment="Top" Width="500" Margin="0,10,10,0" Grid.ColumnSpan="2"/>
         <Button x:Name="Button_Speichern" Content="Speichern" HorizontalAlignment="Left" Margin="26,424,0,0" VerticalAlignment="Top" Width="128" Click="Button_Speichern_Click"/>
