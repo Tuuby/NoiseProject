@@ -104,6 +104,9 @@ namespace NoiseTest
                     map.setElevationSeed(seed);
                     map.GenerateElevation();
                     map.GenerateMoisture();
+                    {
+                        map.makeIsland();
+                    }
                     drawMap();
                 }
                 else
@@ -132,6 +135,9 @@ namespace NoiseTest
                         map.setElevationSeed(seed);
                         map.GenerateElevation();
                         map.GenerateMoisture();
+                        {
+                            map.makeIsland();
+                        }
                         drawMap();
                     }
                     else
@@ -164,6 +170,10 @@ namespace NoiseTest
             {
                 map.GenerateElevation();
                 map.GenerateMoisture();
+                if (islandCheck.IsChecked ?? false)
+                {
+                    map.makeIsland();
+                }
                 drawMap();
             }
         }
@@ -172,6 +182,10 @@ namespace NoiseTest
         {
             map.GenerateElevation();
             map.GenerateMoisture();
+            if (islandCheck.IsChecked ?? false)
+            {
+                map.makeIsland();
+            }
             drawMap();
         }
 
@@ -187,6 +201,10 @@ namespace NoiseTest
                         map.setScale((float)scale);
                         map.GenerateElevation();
                         map.GenerateMoisture();
+                        if (islandCheck.IsChecked ?? false)
+                        {
+                            map.makeIsland();
+                        }
                         drawMap();
                     } else
                     {
@@ -194,6 +212,18 @@ namespace NoiseTest
                     }
                 }
             }
+        }
+
+        private void IslandCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            map.makeIsland();
+            drawMap();
+        }
+
+        private void IslandCheck_Unchecked(object sender, RoutedEventArgs e)
+        {
+            map.GenerateElevation();
+            drawMap();
         }
     }
 }

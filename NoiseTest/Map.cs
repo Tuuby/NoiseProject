@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace NoiseTest
 {
@@ -106,6 +103,31 @@ namespace NoiseTest
         public byte getWaterlevel()
         {
             return waterlevel;
+        }
+
+        public double calculateDistance(int x1, int y1, int x2, int y2)
+        {
+            int x3 = x2 - x1;
+            int y3 = y2 - y1;
+            int squareX = x3 * x3;
+            int squareY = y3 * y3;
+            int square = squareX + squareY;
+            double distance = Math.Sqrt(square);
+            return distance;
+        }
+
+        public void makeIsland()
+        {
+            double maxDistance = calculateDistance(width / 2, height / 2, 0, 0);
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    double distance = calculateDistance(width / 2, height / 2, x, y) / maxDistance;
+                    distance *= 255;
+                    elevation[x, y] = (byte)((255 + elevation[x, y] - distance) / 2);
+                }
+            }
         }
 
         //public void setWeedlevel(byte weedlevel)
