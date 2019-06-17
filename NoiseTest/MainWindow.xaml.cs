@@ -55,6 +55,10 @@ namespace NoiseTest
             byte wert = (byte)e.NewValue;
             wl.Text = wert.ToString();
             map.setWaterlevel(wert);
+            if (Math.Abs(e.NewValue - e.OldValue) >= 20)
+            {
+                drawMap();
+            }
         }
 
         private void Wasserlevel_DragCompleted(object sender, DragCompletedEventArgs e)
@@ -156,6 +160,12 @@ namespace NoiseTest
             double wert = e.NewValue;
             Skalierung_Textbox.Text = String.Format("{0:N2}", wert);
             map.setScale((float)wert);
+            if (Math.Abs(e.NewValue - e.OldValue) >= 1)
+            {
+                map.GenerateElevation();
+                map.GenerateMoisture();
+                drawMap();
+            }
         }
 
         private void Skalierungslevel_DragCompleted(object sender, DragCompletedEventArgs e)
