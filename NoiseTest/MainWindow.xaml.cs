@@ -245,38 +245,19 @@ namespace NoiseTest
             drawMap();
         }
 
-        private void TextBox_Weedlevel_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Slider_GebirgeStauchen_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (e.Key == System.Windows.Input.Key.Return)
-            {
-                if (IsNumberPositiv(TextBox_Weedlevel.Text))
-                {
-                    byte weedlevel;
-                    if (Byte.TryParse(TextBox_Weedlevel.Text, out weedlevel))
-                    {
-                        map.setWeedlevel(weedlevel);
-                        Slider_Weedlevel.Value = weedlevel;
-                        drawMap();
-                    }
-                    else
-                    {
-                        TextBox_Weedlevel.Text = "0";
-                        MessageBox.Show("Die eingegebene Zahl ist zu groß", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                else
-                {
-                    TextBox_Weedlevel.Text = "0";
-                    MessageBox.Show("Dieses Feld akzeptiert nur positive Zahlen", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+
         }
 
-        private void Slider_Weedlevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Slider_GebirgeStauchen_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            byte wert = (byte)(e.NewValue);
-            map.setWeedlevel(wert);
-            TextBox_Weedlevel.Text = wert.ToString();
+
+        }
+
+        private void TextBox_GebirgeStauchen_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+
         }
     }
 }

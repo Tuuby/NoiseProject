@@ -25,12 +25,14 @@ namespace NoiseTest
             this.height = height;
             elevation = createArray();
             moisture = createArray();
+            compressedElevation = createArray();
         }
 
         public Map(int seed)
         {
             elevation = createArray();
             moisture = createArray();
+            compressedElevation = createArray();
             elevationSeed = seed;
         }
 
@@ -38,6 +40,7 @@ namespace NoiseTest
         {
             elevation = createArray();
             moisture = createArray();
+            compressedElevation = createArray();
         }
 
         // erstellt ein zweidimensionales Array mit den Ausmaßen width*height
@@ -194,13 +197,14 @@ namespace NoiseTest
             }
         }
 
-        public void compressingElevation (double divisor)
+        public void compressingElevation (double factor)
         {
             for(int x = 0; x < width; x++)
             {
                 for(int y = 0; y < height; y++)
                 {
-                    compressedElevation[x, y] = (byte) (elevation[x, y] / divisor);
+                    if(elevation[x, y] < Byte.MaxValue / factor)
+                        compressedElevation[x, y] = (byte) (elevation[x, y] * factor);
                 }
             }
         }
