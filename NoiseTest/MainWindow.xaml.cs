@@ -104,6 +104,7 @@ namespace NoiseTest
                     map.setElevationSeed(seed);
                     map.GenerateElevation();
                     map.GenerateMoisture();
+                    if (islandCheck.IsChecked ?? false)
                     {
                         map.makeIsland();
                     }
@@ -135,6 +136,7 @@ namespace NoiseTest
                         map.setElevationSeed(seed);
                         map.GenerateElevation();
                         map.GenerateMoisture();
+                        if (islandCheck.IsChecked ?? false)
                         {
                             map.makeIsland();
                         }
