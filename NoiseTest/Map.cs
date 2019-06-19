@@ -244,32 +244,12 @@ namespace NoiseTest
                                 localMaxY = yBlock + y;
                             }
                         }
-                        trees[localMaxX, localMaxY] = true;
                     }
+                    trees[localMaxX, localMaxY] = true;
+                    localMax = 0;
                 }
             }
-        //{
-        //    int x = 0;
-        //    int y = 0;
-        //    while (!(x == width) && !(y == height))
-        //    {
-        //        byte localMax = 0;
-        //        int localMaxX = 0;
-        //        int localMaxY = 0;
-        //        for (; x < x + range; x++)
-        //        {
-        //            for (; y < y + range; y++)
-        //            {
-        //                if (moisture[x,y] > localMax)
-        //                {
-        //                    localMax = moisture[x, y];
-        //                    localMaxX = x;
-        //                    localMaxY = y;
-        //                }
-        //            }
-        //            trees[localMaxX, localMaxY] = true;
-        //        }
-        //    }
+            localMaxX = 0;
         }
     }
 }
