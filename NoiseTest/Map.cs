@@ -14,6 +14,7 @@ namespace NoiseTest
         private byte[,] elevation;
         private byte[,] moisture;
         private byte[,] compressedElevation;
+        private bool[,] trees;
         private float scale = 0.01f;
         private byte waterlevel = 0;
         private byte weedlevel = 0;
@@ -26,6 +27,7 @@ namespace NoiseTest
             elevation = createArray();
             moisture = createArray();
             compressedElevation = createArray();
+            trees = new bool[this.width, this.height];
         }
 
         public Map(int seed)
@@ -34,6 +36,7 @@ namespace NoiseTest
             moisture = createArray();
             compressedElevation = createArray();
             elevationSeed = seed;
+            trees = new bool[width, height];
         }
 
         public Map()
@@ -95,6 +98,17 @@ namespace NoiseTest
         public byte[,] getMoisture()
         {
             return moisture;
+        }
+
+        public bool getTrees(int x, int y)
+        {
+            return trees[x, y];
+        }
+
+        // gibt das gesamte Array elevation zurück
+        public bool[,] getTrees()
+        {
+            return trees;
         }
 
         public void setScale(float scale)
@@ -207,6 +221,55 @@ namespace NoiseTest
                         compressedElevation[x, y] = (byte) (elevation[x, y] * factor);
                 }
             }
+        }
+
+        public void distributeTrees(int range)
+        {
+            int localMax = 0;
+            int localMaxX = 0;
+            int localMaxY = 0;
+
+            for (int xBlock = 0; xBlock < width / range; xBlock++)
+            {
+                for (int yBlock = 0; yBlock < height / range; yBlock++)
+                {
+                    for (int x = 0; x < range && (xBlock + x) < width; x++)
+                    {
+                        for(int y = 0; y < range && (yBlock + y) < height; y++)
+                        {
+                            if (moisture[xBlock + x, yBlock + y] > localMax)
+                            {
+                                localMax = moisture[xBlock + x, yBlock + y];
+                                localMaxX = xBlock + x;
+                                localMaxY = yBlock + y;
+                            }
+                        }
+                        trees[localMaxX, localMaxY] = true;
+                    }
+                }
+            }
+        //{
+        //    int x = 0;
+        //    int y = 0;
+        //    while (!(x == width) && !(y == height))
+        //    {
+        //        byte localMax = 0;
+        //        int localMaxX = 0;
+        //        int localMaxY = 0;
+        //        for (; x < x + range; x++)
+        //        {
+        //            for (; y < y + range; y++)
+        //            {
+        //                if (moisture[x,y] > localMax)
+        //                {
+        //                    localMax = moisture[x, y];
+        //                    localMaxX = x;
+        //                    localMaxY = y;
+        //                }
+        //            }
+        //            trees[localMaxX, localMaxY] = true;
+        //        }
+        //    }
         }
     }
 }

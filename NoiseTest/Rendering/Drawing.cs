@@ -17,6 +17,7 @@ namespace NoiseTest
             System.Drawing.Color col = new System.Drawing.Color();
             byte elevation; 
             byte moisture;
+            bool tree;
 
             Biom OCEAN = new Biom(240, 100);
             Biom BEACH = new Biom(40, 75);
@@ -25,6 +26,7 @@ namespace NoiseTest
             //Biom Tundra = new Biom();
             Biom SWAMP = new Biom(85, 80);
             Biom MOUNTAIN = new Biom(0, 0);
+            Biom TREE = new Biom(130, 100);
 
             for (int x = 0; x < bitmap.Width; x++)
             {
@@ -32,6 +34,8 @@ namespace NoiseTest
                 {
                     elevation = map.getElevation(x, y);
                     moisture = map.getMoisture(x, y);
+                    tree = map.getTrees(x, y);
+
                     if (elevation <= map.getWaterlevel()) // OCEAN
                         col = ColorHSV.fromHSV(OCEAN, (byte)(100 - (map.getWaterlevel() - elevation) / 2.55));
                     else if (elevation <= map.getWaterlevel() + 15) // BEACH a little above OCEAN
@@ -47,10 +51,14 @@ namespace NoiseTest
                     }
                     else
                         col = ColorHSV.fromHSV(MOUNTAIN, (byte)(elevation / 2.55));
+                    if (tree)
+                    {
+                        col = ColorHSV.fromHSV(TREE, 40);
+                    }
 
                     bitmap.SetPixel(x, y, col);
                 }
-            }
+            }           
 
             //ImageSource imageSource = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
             //TaskCompletionSource<ImageSource> tcs = new TaskCompletionSource<ImageSource>();
