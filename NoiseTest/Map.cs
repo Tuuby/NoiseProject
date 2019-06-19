@@ -225,31 +225,20 @@ namespace NoiseTest
 
         public void distributeTrees(int range)
         {
-            int localMax = 0;
-            int localMaxX = 0;
-            int localMaxY = 0;
-
-            for (int xBlock = 0; xBlock < width / range; xBlock++)
+            trees = new bool[width, height];
+            Random rnd = new Random();
+            for (int x = 0; x < width; x++)
             {
-                for (int yBlock = 0; yBlock < height / range; yBlock++)
+                for (int y = 0; y < height; y++)
                 {
-                    for (int x = 0; x < range && (xBlock + x) < width; x++)
+                    byte m = moisture[x, y];
+                    int rdm = rnd.Next(255);
+                    if (rdm < m / 8)
                     {
-                        for(int y = 0; y < range && (yBlock + y) < height; y++)
-                        {
-                            if (moisture[xBlock + x, yBlock + y] > localMax)
-                            {
-                                localMax = moisture[xBlock + x, yBlock + y];
-                                localMaxX = xBlock * range + x;
-                                localMaxY = yBlock * range + y;
-                            }
-                        }
+                        trees[x, y] = true;
                     }
-                    trees[localMaxX, localMaxY] = true;
-                    localMax = 0;
-                }
+                } 
             }
-            localMaxX = 0;
         }
     }
 }

@@ -109,6 +109,7 @@ namespace NoiseTest
                     map.setElevationSeed(seed);
                     map.GenerateElevation();
                     map.GenerateMoisture();
+                    map.distributeTrees(50);
                     if (islandCheck.IsChecked ?? false)
                     {
                         map.makeIsland();
@@ -141,6 +142,7 @@ namespace NoiseTest
                         map.setElevationSeed(seed);
                         map.GenerateElevation();
                         map.GenerateMoisture();
+                        map.distributeTrees(50);
                         if (islandCheck.IsChecked ?? false)
                         {
                             map.makeIsland();
@@ -176,6 +178,7 @@ namespace NoiseTest
             {
                 map.GenerateElevation();
                 map.GenerateMoisture();
+                map.distributeTrees(50);
                 if (islandCheck.IsChecked ?? false)
                 {
                     map.makeIsland();
@@ -188,6 +191,7 @@ namespace NoiseTest
         {
             map.GenerateElevation();
             map.GenerateMoisture();
+            map.distributeTrees(50);
             if (islandCheck.IsChecked ?? false)
             {
                 map.makeIsland();
@@ -207,6 +211,7 @@ namespace NoiseTest
                         map.setScale((float)scale);
                         map.GenerateElevation();
                         map.GenerateMoisture();
+                        map.distributeTrees(50);
                         if (islandCheck.IsChecked ?? false)
                         {
                             map.makeIsland();
