@@ -51,7 +51,7 @@ namespace NoiseTest
                     }
                     else
                         col = ColorHSV.fromHSV(MOUNTAIN, (byte)(elevation / 2.55));
-                    if (tree)
+                    if (tree && elevation >= map.getWaterlevel())
                     {
                         col = ColorHSV.fromHSV(TREE, 100);
                     }
