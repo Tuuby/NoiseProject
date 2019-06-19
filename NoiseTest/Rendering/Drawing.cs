@@ -53,7 +53,7 @@ namespace NoiseTest
                         col = ColorHSV.fromHSV(MOUNTAIN, (byte)(elevation / 2.55));
                     if (tree)
                     {
-                        col = ColorHSV.fromHSV(TREE, 40);
+                        col = ColorHSV.fromHSV(TREE, 100);
                     }
 
                     bitmap.SetPixel(x, y, col);

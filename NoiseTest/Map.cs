@@ -240,8 +240,8 @@ namespace NoiseTest
                             if (moisture[xBlock + x, yBlock + y] > localMax)
                             {
                                 localMax = moisture[xBlock + x, yBlock + y];
-                                localMaxX = xBlock + x;
-                                localMaxY = yBlock + y;
+                                localMaxX = xBlock * range + x;
+                                localMaxY = yBlock * range + y;
                             }
                         }
                     }

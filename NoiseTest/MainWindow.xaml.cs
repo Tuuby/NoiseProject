@@ -30,7 +30,7 @@ namespace NoiseTest
             InitializeComponent();
             map.GenerateElevation();
             map.GenerateMoisture();
-            map.distributeTrees(10);
+            map.distributeTrees(20);
 
             drawMap();
         }
