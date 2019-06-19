@@ -26,7 +26,7 @@ namespace NoiseTest
             //Biom Tundra = new Biom();
             Biom SWAMP = new Biom(85, 80);
             Biom MOUNTAIN = new Biom(0, 0);
-            Biom TREE = new Biom(130, 100);
+            Biom TREE = new Biom(30, 100);
 
             for (int x = 0; x < bitmap.Width; x++)
             {
@@ -48,13 +48,13 @@ namespace NoiseTest
                             col = ColorHSV.fromHSV(SWAMP, (byte)(elevation / 2.55));
                         else
                             col = ColorHSV.fromHSV(GRASS, (byte)(elevation / 2.55));
+                        if (tree)
+                        {
+                            col = ColorHSV.fromHSV(TREE, 40);
+                        }
                     }
                     else
                         col = ColorHSV.fromHSV(MOUNTAIN, (byte)(elevation / 2.55));
-                    if (tree && elevation >= map.getWaterlevel())
-                    {
-                        col = ColorHSV.fromHSV(TREE, 100);
-                    }
 
                     bitmap.SetPixel(x, y, col);
                 }
