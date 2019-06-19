@@ -30,8 +30,9 @@ namespace NoiseTest
             InitializeComponent();
             map.GenerateElevation();
             map.GenerateMoisture();
-            map.distributeTrees(50);
+            map.distributeTrees();
 
+            map.setWaterlevel(20);
             map.setWeedlevel(250);
 
             drawMap();
@@ -109,7 +110,7 @@ namespace NoiseTest
                     map.setElevationSeed(seed);
                     map.GenerateElevation();
                     map.GenerateMoisture();
-                    map.distributeTrees(50);
+                    map.distributeTrees();
                     if (islandCheck.IsChecked ?? false)
                     {
                         map.makeIsland();
@@ -142,7 +143,7 @@ namespace NoiseTest
                         map.setElevationSeed(seed);
                         map.GenerateElevation();
                         map.GenerateMoisture();
-                        map.distributeTrees(50);
+                        map.distributeTrees();
                         if (islandCheck.IsChecked ?? false)
                         {
                             map.makeIsland();
@@ -178,7 +179,7 @@ namespace NoiseTest
             {
                 map.GenerateElevation();
                 map.GenerateMoisture();
-                map.distributeTrees(50);
+                map.distributeTrees();
                 if (islandCheck.IsChecked ?? false)
                 {
                     map.makeIsland();
@@ -191,7 +192,7 @@ namespace NoiseTest
         {
             map.GenerateElevation();
             map.GenerateMoisture();
-            map.distributeTrees(50);
+            map.distributeTrees();
             if (islandCheck.IsChecked ?? false)
             {
                 map.makeIsland();
@@ -211,7 +212,7 @@ namespace NoiseTest
                         map.setScale((float)scale);
                         map.GenerateElevation();
                         map.GenerateMoisture();
-                        map.distributeTrees(50);
+                        map.distributeTrees();
                         if (islandCheck.IsChecked ?? false)
                         {
                             map.makeIsland();

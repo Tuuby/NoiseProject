@@ -223,7 +223,7 @@ namespace NoiseTest
             }
         }
 
-        public void distributeTrees(int range)
+        public void distributeTrees()
         {
             trees = new bool[width, height];
             Random rnd = new Random();
@@ -233,7 +233,7 @@ namespace NoiseTest
                 {
                     byte m = moisture[x, y];
                     int rdm = rnd.Next(255);
-                    if (rdm < m / 8)
+                    if (rdm < m / 8 * scale)
                     {
                         trees[x, y] = true;
                     }

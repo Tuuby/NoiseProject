@@ -20,13 +20,13 @@ namespace NoiseTest
             bool tree;
 
             Biom OCEAN = new Biom(240, 100);
-            Biom BEACH = new Biom(40, 75);
+            Biom BEACH = new Biom(44, 51);
             Biom GRASS = new Biom(100, 90);
             Biom DESERT = new Biom(60, 75);
             //Biom Tundra = new Biom();
             Biom SWAMP = new Biom(85, 80);
             Biom MOUNTAIN = new Biom(0, 0);
-            Biom TREE = new Biom(30, 100);
+            Biom TREE = new Biom(140, 80);
 
             for (int x = 0; x < bitmap.Width; x++)
             {
@@ -38,8 +38,8 @@ namespace NoiseTest
 
                     if (elevation <= map.getWaterlevel()) // OCEAN
                         col = ColorHSV.fromHSV(OCEAN, (byte)(100 - (map.getWaterlevel() - elevation) / 2.55));
-                    else if (elevation <= map.getWaterlevel() + 15) // BEACH a little above OCEAN
-                        col = ColorHSV.fromHSV(BEACH, (byte)(elevation / 2.55));
+                    else if (elevation <= map.getWaterlevel() + 10) // BEACH a little above OCEAN
+                        col = ColorHSV.fromHSV(BEACH, (byte)(50 + (elevation / 5.1)));
                     else if (elevation <= map.getWeedlevel())
                     {
                         if (moisture < 30)
