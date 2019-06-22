@@ -32,15 +32,15 @@ namespace NoiseTest
             {
                 for (int y = 0; y < bitmap.Height; y++)
                 {
-                    elevation = map.getElevation(x, y);
-                    moisture = map.getMoisture(x, y);
-                    tree = map.getTrees(x, y);
+                    elevation = map.GetElevation(x, y);
+                    moisture = map.GetMoisture(x, y);
+                    tree = map.GetTrees(x, y);
 
-                    if (elevation <= map.getWaterlevel()) // OCEAN
-                        col = ColorHSV.fromHSV(OCEAN, (byte)(100 - (map.getWaterlevel() - elevation) / 2.55));
-                    else if (elevation <= map.getWaterlevel() + 10) // BEACH a little above OCEAN
+                    if (elevation <= map.GetWaterlevel()) // OCEAN
+                        col = ColorHSV.fromHSV(OCEAN, (byte)(100 - (map.GetWaterlevel() - elevation) / 2.55));
+                    else if (elevation <= map.GetWaterlevel() + 10) // BEACH a little above OCEAN
                         col = ColorHSV.fromHSV(BEACH, (byte)(50 + (elevation / 5.1)));
-                    else if (elevation <= map.getWeedlevel())
+                    else if (elevation <= map.GetWeedlevel()) // <- normal land level
                     {
                         if (moisture < 30)
                             col = ColorHSV.fromHSV(DESERT, (byte)(elevation / 2.55));

@@ -22,18 +22,18 @@ namespace NoiseTest
         {
             int seed = rdm.Next();
 
-            map.setScale(5f);
-            map.setElevationSeed(seed);
+            map.SetScale(5f);
+            map.SetElevationSeed(seed);
             seed = rdm.Next();
-            map.setMoistureSeed(seed);
+            map.SetMoistureSeed(seed);
 
             InitializeComponent();
             map.GenerateElevation();
             map.GenerateMoisture();
-            map.distributeTrees();
+            map.DistributeTrees();
 
-            map.setWaterlevel(20);
-            map.setWeedlevel(250);
+            map.SetWaterlevel((byte) Wasserlevel.Value);
+            map.SetWeedlevel(250);
 
             drawMap();
         }
@@ -48,11 +48,11 @@ namespace NoiseTest
         private void SeedRoll_Click(object sender, RoutedEventArgs e) //multiple Seeds?
         {
             int seed = rdm.Next();
-            map.setElevationSeed(seed);
+            map.SetElevationSeed(seed);
             //insert value in Textbox
             SeedEingabe.Text = seed.ToString();
             seed = rdm.Next();
-            map.setMoistureSeed(seed);
+            map.SetMoistureSeed(seed);
         }
 
 
@@ -60,7 +60,7 @@ namespace NoiseTest
         {
             byte wert = (byte)e.NewValue;
             wl.Text = wert.ToString();
-            map.setWaterlevel(wert);
+            map.SetWaterlevel(wert);
             if (Math.Abs(e.NewValue - e.OldValue) >= 20)
             {
                 drawMap();
@@ -76,13 +76,13 @@ namespace NoiseTest
         {
             if (e.Key == System.Windows.Input.Key.Return)
             {
-                if (IsNumberPositiv(wl.Text)) // equals a positiv number
+                if (IsStringAPositivNumber(wl.Text)) // equals a positiv number
                 {
                     byte wert;
                     if (Byte.TryParse(wl.Text, out wert))
                     {
                         //byte wert = Byte.Parse(wl.Text);
-                        map.setWaterlevel(wert);
+                        map.SetWaterlevel(wert);
                         Wasserlevel.Value = wert;
                         drawMap();
                     }
@@ -102,18 +102,18 @@ namespace NoiseTest
 
         private void GenerierKarte_Click(object sender, RoutedEventArgs e)
         {
-            if (IsNumberPositiv(SeedEingabe.Text)) // equals a positiv number
+            if (IsStringAPositivNumber(SeedEingabe.Text)) // equals a positiv number
             {
                 int seed;
                 if (Int32.TryParse(SeedEingabe.Text, out seed))
                 {
-                    map.setElevationSeed(seed);
+                    map.SetElevationSeed(seed);
                     map.GenerateElevation();
                     map.GenerateMoisture();
-                    map.distributeTrees();
+                    map.DistributeTrees();
                     if (islandCheck.IsChecked ?? false)
                     {
-                        map.makeIsland();
+                        map.MakeIsland();
                     }
                     drawMap();
                 }
@@ -135,18 +135,18 @@ namespace NoiseTest
             // setze eingegebenen Seed in Map Elevation
             if (e.Key == System.Windows.Input.Key.Return)
             {
-                if (IsNumberPositiv(SeedEingabe.Text)) // equals a positiv number
+                if (IsStringAPositivNumber(SeedEingabe.Text)) // equals a positiv number
                 {
                     int seed;
                     if (Int32.TryParse(SeedEingabe.Text, out seed))
                     {
-                        map.setElevationSeed(seed);
+                        map.SetElevationSeed(seed);
                         map.GenerateElevation();
                         map.GenerateMoisture();
-                        map.distributeTrees();
+                        map.DistributeTrees();
                         if (islandCheck.IsChecked ?? false)
                         {
-                            map.makeIsland();
+                            map.MakeIsland();
                         }
                         drawMap();
                     }
@@ -164,7 +164,7 @@ namespace NoiseTest
             }
         }
 
-        private bool IsNumberPositiv(String numberStr)
+        private bool IsStringAPositivNumber(String numberStr)
         {
             Regex rgx = new Regex(@"^\d+$");
             if (rgx.IsMatch(numberStr)) return true;
@@ -174,15 +174,15 @@ namespace NoiseTest
         {
             double wert = e.NewValue;
             Skalierung_Textbox.Text = String.Format("{0:N2}", wert);
-            map.setScale((float)wert);
+            map.SetScale((float)wert);
             if (Math.Abs(e.NewValue - e.OldValue) >= 1)
             {
                 map.GenerateElevation();
                 map.GenerateMoisture();
-                map.distributeTrees();
+                map.DistributeTrees();
                 if (islandCheck.IsChecked ?? false)
                 {
-                    map.makeIsland();
+                    map.MakeIsland();
                 }
                 drawMap();
             }
@@ -192,10 +192,10 @@ namespace NoiseTest
         {
             map.GenerateElevation();
             map.GenerateMoisture();
-            map.distributeTrees();
+            map.DistributeTrees();
             if (islandCheck.IsChecked ?? false)
             {
-                map.makeIsland();
+                map.MakeIsland();
             }
             drawMap();
         }
@@ -204,31 +204,46 @@ namespace NoiseTest
         {
             if (e.Key == System.Windows.Input.Key.Return)
             {
-                double scale;
-                if (Double.TryParse(Skalierung_Textbox.Text, out scale))
+                if (new Regex(@"[1-5]([.,]\d+)?").IsMatch(Skalierung_Textbox.Text))
                 {
-                    if (scale >= 1 && scale <= 5)
+                    double scale;
+                    if (Double.TryParse(Skalierung_Textbox.Text, out scale)) // <- 4.5 interpreted as 45
                     {
-                        map.setScale((float)scale);
-                        map.GenerateElevation();
-                        map.GenerateMoisture();
-                        map.distributeTrees();
-                        if (islandCheck.IsChecked ?? false)
+                        if (scale <= 5) // need for better regex fpor blocking valuesgreater than 5
                         {
-                            map.makeIsland();
+                            map.SetScale((float)scale);
+                            map.GenerateElevation();
+                            map.GenerateMoisture();
+                            map.DistributeTrees();
+                            if (islandCheck.IsChecked ?? false)
+                            {
+                                map.MakeIsland();
+                            }
+                            drawMap();
                         }
-                        drawMap();
-                    } else
-                    {
-                        Skalierung_Textbox.Text = "Nur Zahlen zwischen 1 und 5";
+                        else
+                        {
+                            Skalierung_Textbox.Text = "1";
+                            MessageBox.Show("Dieses Feld akzeptiert nur Zahlen zwischen 1 und 5", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
+                    else
+                    {
+                        Skalierung_Textbox.Text = "1";
+                        MessageBox.Show("Dieses Feld akzeptiert nur Zahlen zwischen 1 und 5", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    Skalierung_Textbox.Text = "1";
+                    MessageBox.Show("Dieses Feld akzeptiert nur Zahlen zwischen 1 und 5", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
         private void IslandCheck_Checked(object sender, RoutedEventArgs e)
         {
-            map.makeIsland();
+            map.MakeIsland();
             drawMap();
         }
 
@@ -250,22 +265,17 @@ namespace NoiseTest
                 bitmap.Save(saveFileDialog.FileName);
         }
 
-        private void Slider_Weedlevel_DragCompleted(object sender, DragCompletedEventArgs e)
+        private void TextBox_LandschaftSt_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            drawMap();
+           
         }
 
-        private void Slider_GebirgeStauchen_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
-        }
-
-        private void Slider_GebirgeStauchen_DragCompleted(object sender, DragCompletedEventArgs e)
+        private void Slider_LandschaftSt_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
         }
 
-        private void TextBox_GebirgeStauchen_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Slider_LandschaftSt_DragCompleted(object sender, DragCompletedEventArgs e)
         {
 
         }

@@ -13,105 +13,89 @@ namespace NoiseTest
         private int moistureSeed;
         private byte[,] elevation;
         private byte[,] moisture;
-        private byte[,] compressedElevation;
         private bool[,] trees;
         private float scale = 0.01f;
         private byte waterlevel = 0;
         private byte weedlevel = 0;
+        private double multiplyElevationFactor;
         //private byte weedlevel = 0;
 
         public Map(int width, int height)
         {
             this.width = width;
             this.height = height;
-            elevation = createArray();
-            moisture = createArray();
-            compressedElevation = createArray();
+            elevation = CreateArray();
+            moisture = CreateArray();
             trees = new bool[this.width, this.height];
         }
 
         public Map(int seed)
         {
-            elevation = createArray();
-            moisture = createArray();
-            compressedElevation = createArray();
+            elevation = CreateArray();
+            moisture = CreateArray();
             elevationSeed = seed;
             trees = new bool[width, height];
         }
 
         public Map()
         {
-            elevation = createArray();
-            moisture = createArray();
-            compressedElevation = createArray();
+            elevation = CreateArray();
+            moisture = CreateArray();
         }
 
         // erstellt ein zweidimensionales Array mit den Ausmaßen width*height
-        private byte[,] createArray()
+        private byte[,] CreateArray()
         {
             return new byte[width, height];
         }
 
-        public void setElevationSeed(int seed)
+        public void SetElevationSeed(int seed)
         {
             elevationSeed = seed;
         }
 
-        public void setMoistureSeed(int seed)
+        public void SetMoistureSeed(int seed)
         {
             moistureSeed = seed;
         }
 
         // gibt den Höhenwert eines einzelnen Punktes im Array zurück
-        public byte getElevation(int x, int y)
+        public byte GetElevation(int x, int y)
         {
             return elevation[x, y];
         }
 
         // gibt das gesamte Array elevation zurück
-        public byte[,] getElevation()
+        public byte[,] GetElevation()
         {
             return elevation;
         }
 
         // gibt den Höhenwert eines einzelnen Punktes im Array zurück
 
-        public byte getCompressedElevation(int x, int y)
-        {
-            return compressedElevation[x, y];
-        }
-
-        // gibt das gesamte Array elevation zurück
-        public byte[,] getCOmpressedElevation()
-        {
-            return compressedElevation;
-        }
-
-        // gibt den Höhenwert eines einzelnen Punktes im Array zurück
-
-        public byte getMoisture(int x, int y)
+        public byte GetMoisture(int x, int y)
         {
             return moisture[x, y];
         }
 
         // gibt das gesamte Array elevation zurück
-        public byte[,] getMoisture()
+        public byte[,] GetMoisture()
         {
             return moisture;
         }
 
-        public bool getTrees(int x, int y)
+        public bool GetTrees(int x, int y)
         {
             return trees[x, y];
         }
 
         // gibt das gesamte Array elevation zurück
-        public bool[,] getTrees()
+        public bool[,] GetTrees()
         {
             return trees;
         }
 
-        public void setScale(float scale)
+        public void SetScale(float scale)
         {
             if ((scale >= 1) && (scale <= 5))
             {
@@ -123,23 +107,23 @@ namespace NoiseTest
             }
         }
 
-        public float getScale()
+        public float GetScale()
         {
             return scale;
         }
 
-        public void setWaterlevel(byte waterlevel)
+        public void SetWaterlevel(byte waterlevel)
         {
             this.waterlevel = waterlevel;
         }
 
-        public byte getWaterlevel()
+        public byte GetWaterlevel()
         {
             return waterlevel;
         }
 
 
-        public double calculateDistance(int x1, int y1, int x2, int y2)
+        public double CalculateDistance(int x1, int y1, int x2, int y2)
         {
             int x3 = x2 - x1;
             int y3 = y2 - y1;
@@ -150,14 +134,14 @@ namespace NoiseTest
             return distance;
         }
 
-        public void makeIsland()
+        public void MakeIsland()
         {
-            double maxDistance = calculateDistance(width / 2, height / 2, 0, 0);
+            double maxDistance = CalculateDistance(width / 2, height / 2, 0, 0);
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    double distance = calculateDistance(width / 2, height / 2, x, y) / maxDistance;
+                    double distance = CalculateDistance(width / 2, height / 2, x, y) / maxDistance;
                     distance *= 255;
                     elevation[x, y] = (byte)((255 + elevation[x, y] - distance) / 2);
                 }
@@ -169,19 +153,30 @@ namespace NoiseTest
         //    this.weedlevel = weedlevel;
         //}
 
-        public void setWeedlevel(byte weedlevel)
+        public void SetWeedlevel(byte weedlevel)
         {
             this.weedlevel = weedlevel;
         }
 
-        public byte getWeedlevel()
+        public byte GetWeedlevel()
         {
             return weedlevel;
         }
 
-        // füllt das Array elevation mit Höhenwerten, welche durch Überlagerung mehrerer Simplex-Noises generiert werden
-        public void GenerateElevation()
+        public void SetMultiplyElevationFactor(double multiplyFactor)
         {
+            multiplyElevationFactor = multiplyFactor;
+        }
+
+        public double GetMultiplyElevationFactor()
+        {
+            return multiplyElevationFactor;
+        }
+
+        // füllt das Array elevation mit Höhenwerten, welche durch Überlagerung mehrerer Simplex-Noises generiert werden
+        public void GenerateElevation() // default value, when no paramter 
+        {
+            double multiplyFactor = GetMultiplyElevationFactor();
             Noise.Seed = elevationSeed;
             for (int x = 0; x < width; x++)
             {
@@ -191,6 +186,17 @@ namespace NoiseTest
                                     + 0.5 * Noise.CalcPixel2D(x, y, 2 * scale)
                                     + 0.25 * Noise.CalcPixel2D(x, y, 4 * scale)) / 1.75;    //1.75 ist wichtig um innerhalb der Grenzen eines Bytes zu bleiben
                     elevation[x, y] = (byte)(Math.Pow(el, 2) / 255);
+                    if(multiplyFactor > 1)
+                    {
+                        if(el <= Byte.MaxValue / multiplyFactor) 
+                            elevation[x, y] = (byte) (elevation[x, y] * multiplyFactor);
+                    }
+                    else if (multiplyFactor < 1)
+                    {
+                        if (el >= Byte.MinValue / multiplyFactor)
+                            elevation[x, y] = (byte)(elevation[x, y] * multiplyFactor);
+                    }
+                       
                 }
             }
         }
@@ -211,19 +217,7 @@ namespace NoiseTest
             }
         }
 
-        public void compressingElevation (double factor)
-        {
-            for(int x = 0; x < width; x++)
-            {
-                for(int y = 0; y < height; y++)
-                {
-                    if(elevation[x, y] < Byte.MaxValue / factor)
-                        compressedElevation[x, y] = (byte) (elevation[x, y] * factor);
-                }
-            }
-        }
-
-        public void distributeTrees()
+        public void DistributeTrees()
         {
             trees = new bool[width, height];
             Random rnd = new Random();
