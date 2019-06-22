@@ -28,8 +28,8 @@
             <TextBox x:Name ="Skalierung_Textbox" Height="23" Margin="58,148,59,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" KeyDown="Skalierung_Textbox_KeyDown" HorizontalAlignment="Center" IsReadOnlyCaretVisible="True"/>
             <Slider x:Name="Skalierungslevel" HorizontalAlignment="Center" Margin="0,119,-4,0" VerticalAlignment="Top" Width="241" TickPlacement="BottomRight" Ticks="1 2 3 4 5 6 7 8 9 10" ValueChanged="Skalierungslevel_ValueChanged" Thumb.DragCompleted="Skalierungslevel_DragCompleted" Maximum="5" Minimum="1"/>
             <Label x:Name="LandschaftSt" Content="Landschaft Stauchen / Strecken" HorizontalAlignment="Center" Height="26" Margin="36,186,27,0" VerticalAlignment="Top" Width="174"/>
-            <TextBox x:Name="TextBox_LandschaftSt" HorizontalAlignment="Left" Height="23" Margin="58,246,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" KeyDown="TextBox_LandschaftSt_KeyDown"/>
-            <Slider x:Name="Slider_LandschaftSt" HorizontalAlignment="Left" Margin="0,217,0,0" VerticalAlignment="Top" Width="237" TickPlacement="BottomRight" ValueChanged="Slider_LandschaftSt_ValueChanged" Thumb.DragCompleted="Slider_LandschaftSt_DragCompleted" Minimum="0.1" Value="1" Ticks="0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1 2 3 4 5 6 7 8 9 10" TickFrequency="0" IsSnapToTickEnabled="True"/>
+            <TextBox x:Name="TextBox_LandschaftSt" HorizontalAlignment="Left" Height="23" Margin="58,246,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyDown="TextBox_LandschaftSt_KeyDown"/>
+            <Slider x:Name="Slider_LandschaftSt" HorizontalAlignment="Left" Margin="0,217,0,0" VerticalAlignment="Top" Width="237" TickPlacement="BottomRight" ValueChanged="Slider_LandschaftSt_ValueChanged" Thumb.DragCompleted="Slider_LandschaftSt_DragCompleted" Minimum="-100" Ticks="{x:Null}" TickFrequency="0" Maximum="100" LargeChange="0"/>
         </Grid>
         <Button x:Name="Button_Speichern" Content="Speichern" HorizontalAlignment="Left" Margin="34,427,0,0" VerticalAlignment="Top" Width="128" Click="Button_Speichern_Click"/>
     </Grid>

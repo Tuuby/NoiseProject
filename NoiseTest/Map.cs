@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace NoiseTest
 {
@@ -17,7 +16,7 @@ namespace NoiseTest
         private float scale = 0.01f;
         private byte waterlevel = 0;
         private byte weedlevel = 0;
-        private double multiplyElevationFactor;
+        private int elevationDifferenz;
         //private byte weedlevel = 0;
 
         public Map(int width, int height)
@@ -163,20 +162,20 @@ namespace NoiseTest
             return weedlevel;
         }
 
-        public void SetMultiplyElevationFactor(double multiplyFactor)
+        public void SetElevationDifferenz(int value)
         {
-            multiplyElevationFactor = multiplyFactor;
+            elevationDifferenz = value;
         }
 
-        public double GetMultiplyElevationFactor()
+        public int GetElevationDifferenz()
         {
-            return multiplyElevationFactor;
+            return elevationDifferenz;
         }
 
         // füllt das Array elevation mit Höhenwerten, welche durch Überlagerung mehrerer Simplex-Noises generiert werden
         public void GenerateElevation() // default value, when no paramter 
         {
-            double multiplyFactor = GetMultiplyElevationFactor();
+            int multiplyFactor = GetElevationDifferenz();
             Noise.Seed = elevationSeed;
             for (int x = 0; x < width; x++)
             {
@@ -186,17 +185,21 @@ namespace NoiseTest
                                     + 0.5 * Noise.CalcPixel2D(x, y, 2 * scale)
                                     + 0.25 * Noise.CalcPixel2D(x, y, 4 * scale)) / 1.75;    //1.75 ist wichtig um innerhalb der Grenzen eines Bytes zu bleiben
                     elevation[x, y] = (byte)(Math.Pow(el, 2) / 255);
-                    if(multiplyFactor > 1)
+                    if (GetElevationDifferenz() < 0)
                     {
-                        if(el <= Byte.MaxValue / multiplyFactor) 
-                            elevation[x, y] = (byte) (elevation[x, y] * multiplyFactor);
+                        // elevation + (-50) >= Byte.Min
+                        // elevation >= Byte.Min - (-50)
+                        if (elevation[x, y] >= Byte.MinValue - GetElevationDifferenz())
+                        {
+                            elevation[x, y] = (byte)(GetElevationDifferenz() + elevation[x, y]);
+                        }
                     }
-                    else if (multiplyFactor < 1)
-                    {
-                        if (el >= Byte.MinValue / multiplyFactor)
-                            elevation[x, y] = (byte)(elevation[x, y] * multiplyFactor);
+                    else if (GetElevationDifferenz() > 0) {
+                        if (elevation[x, y] <= Byte.MaxValue - GetElevationDifferenz())
+                        {
+                            elevation[x, y] = (byte)(GetElevationDifferenz() + elevation[x, y]);
+                        }
                     }
-                       
                 }
             }
         }

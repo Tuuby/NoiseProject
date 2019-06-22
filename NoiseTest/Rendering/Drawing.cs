@@ -1,11 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Drawing;
-using System.Windows.Media;
-using System.Windows.Interop;
-using System.Windows.Media.Imaging;
-using System.Windows.Controls.Primitives;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace NoiseTest
 {

@@ -32,7 +32,7 @@ namespace NoiseTest
             map.GenerateMoisture();
             map.DistributeTrees();
 
-            map.SetWaterlevel((byte) Wasserlevel.Value);
+            map.SetWaterlevel((byte) Wasserlevel.Value); // default value for slider -> textbox will be automatically updated
             map.SetWeedlevel(250);
 
             drawMap();
@@ -167,8 +167,7 @@ namespace NoiseTest
         private bool IsStringAPositivNumber(String numberStr)
         {
             Regex rgx = new Regex(@"^\d+$");
-            if (rgx.IsMatch(numberStr)) return true;
-            return false;
+            return rgx.IsMatch(numberStr);
         }
         private void Skalierungslevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -267,17 +266,59 @@ namespace NoiseTest
 
         private void TextBox_LandschaftSt_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-           
+            if (e.Key == System.Windows.Input.Key.Return)
+            {
+                if (new Regex(@"^[-]?\d+$").IsMatch(TextBox_LandschaftSt.Text)) // equals a number (negativ and/or with digits after a , or . )
+                {
+                    int wert;
+                    if (Int32.TryParse(TextBox_LandschaftSt.Text, out wert))
+                    {
+                        if (wert <= 100 && wert >= -100)
+                        {
+                            map.SetElevationDifferenz(wert);
+                            map.GenerateElevation();
+                            //map.DistributeTrees();
+                            if (islandCheck.IsChecked ?? false)
+                            {
+                                map.MakeIsland();
+                            }
+                            drawMap();
+                        }
+                        else
+                        {
+                            TextBox_LandschaftSt.Text = "0";
+                            MessageBox.Show("Diese Feld akzeptiert nur ganzzahlige Zahlen im Intervall von -100 bis 100", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        TextBox_LandschaftSt.Text = "0";
+                        MessageBox.Show("Diese Feld akzeptiert nur ganzzahlige Zahlen im Intervall von -100 bis 100", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    TextBox_LandschaftSt.Text = "0";
+                    MessageBox.Show("Diese Feld akzeptiert nur ganzzahlige Zahlen im Intervall von -100 bis 100", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void Slider_LandschaftSt_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            int wert = (int)e.NewValue;
+            TextBox_LandschaftSt.Text = wert.ToString();
+            map.SetElevationDifferenz(wert);
         }
 
         private void Slider_LandschaftSt_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-
+            map.GenerateElevation();
+            if (islandCheck.IsChecked ?? false)
+            {
+                map.MakeIsland();
+            }
+            drawMap();
         }
     }
 }
