@@ -5,11 +5,11 @@ namespace NoiseTest
 {
     static class ColorHSV
     {
-        static public Color fromHSV(Biom biom, byte value) // hue and saturation information in Struct Biom
+        static public Color fromHSV(int hue, byte saturation, byte value) // hue and saturation information in Struct Biom
         {
             double h, s, v;
-            h = biom.hue;
-            s = biom.saturation / 100.0;
+            h = hue;
+            s = saturation / 100.0;
             v = value / 100.0;
 
             double chroma = v * s;

@@ -16,7 +16,7 @@ namespace NoiseTest
             Biom BEACH = new Biom(44, 51);
             Biom GRASS = new Biom(100, 90);
             Biom DESERT = new Biom(60, 75);
-            //Biom Tundra = new Biom();
+            Biom TUNDRA = new Biom(0, 0);
             Biom SWAMP = new Biom(85, 80);
             Biom MOUNTAIN = new Biom(0, 0);
             Biom TREE = new Biom(140, 80);
@@ -30,24 +30,29 @@ namespace NoiseTest
                     tree = map.GetTrees(x, y);
 
                     if (elevation <= map.GetWaterlevel()) // OCEAN
-                        col = ColorHSV.fromHSV(OCEAN, (byte)(100 - (map.GetWaterlevel() - elevation) / 2.55));
+                        col = ColorHSV.fromHSV(OCEAN.hue, OCEAN.saturation, (byte)(100 - (map.GetWaterlevel() - elevation) / 2.55));
                     else if (elevation <= map.GetWaterlevel() + 10) // BEACH a little above OCEAN
-                        col = ColorHSV.fromHSV(BEACH, (byte)(50 + (elevation / 5.1)));
-                    else if (elevation <= map.GetWeedlevel()) // <- normal land level
+                        col = ColorHSV.fromHSV(BEACH.hue, BEACH.saturation, (byte)(50 + (elevation / 5.1)));
+                    else if (elevation <= 150) // <- normal land level
                     {
                         if (moisture < 30)
-                            col = ColorHSV.fromHSV(DESERT, (byte)(elevation / 2.55));
+                            col = ColorHSV.fromHSV(DESERT.hue, DESERT.saturation, (byte)(elevation / 2.55));
                         else if (moisture > 170)
-                            col = ColorHSV.fromHSV(SWAMP, (byte)(elevation / 2.55));
+                            col = ColorHSV.fromHSV(SWAMP.hue, SWAMP.saturation, (byte)(elevation / 2.55));
                         else
-                            col = ColorHSV.fromHSV(GRASS, (byte)(elevation / 2.55));
+                            col = ColorHSV.fromHSV(GRASS.hue, GRASS.saturation, (byte)(elevation / 2.55));
                         if (tree)
                         {
-                            col = ColorHSV.fromHSV(TREE, 40);
+                            col = ColorHSV.fromHSV(TREE.hue, TREE.saturation, 40);
                         }
                     }
                     else
-                        col = ColorHSV.fromHSV(MOUNTAIN, (byte)(elevation / 2.55));
+                    {
+                        if (moisture >= 127)
+                            col = ColorHSV.fromHSV(TUNDRA.hue, TUNDRA.saturation, (byte)(elevation / 2.55));
+                        else
+                            col = ColorHSV.fromHSV(MOUNTAIN.hue, MOUNTAIN.saturation, (byte)(elevation / 3.0));
+                    }
 
                     bitmap.SetPixel(x, y, col);
                 }

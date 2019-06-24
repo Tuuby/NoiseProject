@@ -190,15 +190,15 @@ namespace NoiseTest
                         // elevation + (-50) >= Byte.Min
                         // elevation >= Byte.Min - (-50)
                         if (elevation[x, y] >= Byte.MinValue - GetElevationDifferenz())
-                        {
                             elevation[x, y] = (byte)(GetElevationDifferenz() + elevation[x, y]);
-                        }
+                        else
+                            elevation[x, y] = Byte.MinValue;
                     }
                     else if (GetElevationDifferenz() > 0) {
                         if (elevation[x, y] <= Byte.MaxValue - GetElevationDifferenz())
-                        {
                             elevation[x, y] = (byte)(GetElevationDifferenz() + elevation[x, y]);
-                        }
+                        else
+                            elevation[x, y] = Byte.MaxValue;
                     }
                 }
             }
@@ -213,8 +213,8 @@ namespace NoiseTest
                 for (int y = 0; y < height; y++)
                 {
                     double mo = Noise.CalcPixel2D(x, y, 0.5f * scale)
-                                   /* + 0.5 * Noise.CalcPixel2D(x, y, 2 * scale)
-                                    + 0.25 * Noise.CalcPixel2D(x, y, 4 * scale)) / 1.75*/;    //1.75 ist wichtig um innerhalb der Grenzen eines Bytes zu bleiben
+                                    + 0.5 * Noise.CalcPixel2D(x, y, 2 * scale)
+                                    + 0.25 * Noise.CalcPixel2D(x, y, 4 * scale) / 1.75;    //1.75 ist wichtig um innerhalb der Grenzen eines Bytes zu bleiben
                     moisture[x, y] = (byte)mo;
                 }
             }
