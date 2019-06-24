@@ -256,8 +256,7 @@ namespace NoiseTest
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             // saveFileDialog.Filter = "Name in der List | Dateiformat";
-            saveFileDialog.Filter = "Bitmap (*.BMP)|*.BMP |JPG-Image (*.JPG)|*.JPG |Portable Network Grafic (*.PNG)|*.PNG |Graphics Interchange Format (*.GIF)|*.GIF"+ 
-                                    "|Portable Document Format (*.PDF)|*.PDF";
+            saveFileDialog.Filter = "Bitmap (*.BMP)|*.BMP |JPG-Image (*.JPG)|*.JPG |Portable Network Grafic (*.PNG)|*.PNG |Graphics Interchange Format (*.GIF)|*.GIF";
             saveFileDialog.FilterIndex = 1;
             saveFileDialog.DefaultExt = "bmp";
             if (saveFileDialog.ShowDialog() == true)
