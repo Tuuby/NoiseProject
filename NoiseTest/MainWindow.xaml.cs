@@ -319,5 +319,18 @@ namespace NoiseTest
             }
             drawMap();
         }
+
+        private void Slider_Feuchtigkeit_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            int wert = (int)e.NewValue;
+            TextBox_Feuchtigkeit.Text = wert.ToString();
+            map.SetMoistureDifferent(wert);
+        }
+
+        private void Slider_Feuchtigkeit_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            map.GenerateMoisture();
+            drawMap();
+        }
     }
 }

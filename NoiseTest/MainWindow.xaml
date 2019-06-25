@@ -19,7 +19,7 @@
             <Label Content="Seed:" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="39"/>
             <Button x:Name="GenerierKarte" Content="Generieren" HorizontalAlignment="Left" Height="26" Margin="54,28,0,0" VerticalAlignment="Top" Width="111" Click="GenerierKarte_Click"/>
         </Grid>
-        <Grid Margin="10,113,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="291">
+        <Grid Margin="10,113,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="377">
             <CheckBox x:Name="islandCheck" Content="Insel" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="IslandCheck_Checked" Unchecked="IslandCheck_Unchecked" RenderTransformOrigin="4.477,-4.267"/>
             <TextBox x:Name ="wl" Height="23" Margin="58,50,59,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" KeyDown="Wl_KeyDown" HorizontalAlignment="Center" IsReadOnlyCaretVisible="True"/>
             <Slider x:Name ="Wasserlevel" Margin="0,26,0,0" VerticalAlignment="Top" Width="237" ValueChanged="Wasserlevel_ValueChanged" Thumb.DragCompleted="Wasserlevel_DragCompleted" Maximum="255" HorizontalAlignment="Center" TickPlacement="BottomRight" TickFrequency="100" Ticks="25 50 75 100" LargeChange="20" Value="20"/>
@@ -27,10 +27,13 @@
             <Label Content="Skalierung" HorizontalAlignment="Center" Margin="82,88,83,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.512,0.5" HorizontalContentAlignment="Center"/>
             <TextBox x:Name ="Skalierung_Textbox" Height="23" Margin="58,148,59,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" KeyDown="Skalierung_Textbox_KeyDown" HorizontalAlignment="Center" IsReadOnlyCaretVisible="True"/>
             <Slider x:Name="Skalierungslevel" HorizontalAlignment="Center" Margin="0,119,-4,0" VerticalAlignment="Top" Width="241" TickPlacement="BottomRight" Ticks="1 2 3 4 5 6 7 8 9 10" ValueChanged="Skalierungslevel_ValueChanged" Thumb.DragCompleted="Skalierungslevel_DragCompleted" Maximum="5" Minimum="1"/>
-            <Label x:Name="LandschaftSt" Content="Landschaft Stauchen / Strecken" HorizontalAlignment="Center" Height="26" Margin="36,186,27,0" VerticalAlignment="Top" Width="174"/>
+            <Label x:Name="LandschaftSt" Content="Höhe" HorizontalAlignment="Center" Height="26" Margin="97,176,98,0" VerticalAlignment="Top" Width="42"/>
             <TextBox x:Name="TextBox_LandschaftSt" HorizontalAlignment="Left" Height="23" Margin="58,246,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyDown="TextBox_LandschaftSt_KeyDown"/>
-            <Slider x:Name="Slider_LandschaftSt" HorizontalAlignment="Left" Margin="0,217,0,0" VerticalAlignment="Top" Width="237" TickPlacement="BottomRight" ValueChanged="Slider_LandschaftSt_ValueChanged" Thumb.DragCompleted="Slider_LandschaftSt_DragCompleted" Minimum="-100" Ticks="{x:Null}" TickFrequency="0" Maximum="100" LargeChange="0"/>
+            <Slider x:Name="Slider_LandschaftSt" HorizontalAlignment="Left" Margin="0,217,0,0" VerticalAlignment="Top" Width="237" TickPlacement="BottomRight" ValueChanged="Slider_LandschaftSt_ValueChanged" Thumb.DragCompleted="Slider_LandschaftSt_DragCompleted" Minimum="-100" Ticks="{x:Null}" TickFrequency="0" Maximum="100" LargeChange="10"/>
+            <Label x:Name="label" Content="Feuchtigkeit" HorizontalAlignment="Left" Margin="82,279,0,0" VerticalAlignment="Top"/>
+            <Slider x:Name="Slider_Feuchtigkeit" HorizontalAlignment="Left" Margin="0,310,0,0" VerticalAlignment="Top" Width="237" TickPlacement="BottomRight" Minimum="-100" Ticks="{x:Null}" TickFrequency="0" Maximum="100" LargeChange="10" ValueChanged="Slider_Feuchtigkeit_ValueChanged" Thumb.DragCompleted="Slider_Feuchtigkeit_DragCompleted"/>
+            <TextBox x:Name="TextBox_Feuchtigkeit" HorizontalAlignment="Left" Height="23" Margin="58,339,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" />
         </Grid>
-        <Button x:Name="Button_Speichern" Content="Speichern" HorizontalAlignment="Left" Margin="34,427,0,0" VerticalAlignment="Top" Width="128" Click="Button_Speichern_Click"/>
+        <Button x:Name="Button_Speichern" Content="Speichern" HorizontalAlignment="Left" Margin="10,520,0,0" VerticalAlignment="Top" Width="128" Click="Button_Speichern_Click"/>
     </Grid>
 </Window>

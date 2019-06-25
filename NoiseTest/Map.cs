@@ -17,6 +17,7 @@ namespace NoiseTest
         private byte waterlevel = 0;
         private byte weedlevel = 0;
         private int elevationDifferenz;
+        private int moistureDifferenz;
         //private byte weedlevel = 0;
 
         public Map(int width, int height)
@@ -172,6 +173,16 @@ namespace NoiseTest
             return elevationDifferenz;
         }
 
+        public void SetMoistureDifferent(int value)
+        {
+            moistureDifferenz = value;
+        }
+
+        public int GetMoistureDifferent()
+        {
+            return moistureDifferenz;
+        }
+
         // füllt das Array elevation mit Höhenwerten, welche durch Überlagerung mehrerer Simplex-Noises generiert werden
         public void GenerateElevation() // default value, when no paramter 
         {
@@ -189,7 +200,7 @@ namespace NoiseTest
                     {
                         // elevation + (-50) >= Byte.Min
                         // elevation >= Byte.Min - (-50)
-                        if (elevation[x, y] >= Byte.MinValue - GetElevationDifferenz())
+                        if (elevation[x, y] >= Byte.MinValue - elevationDifferenz)
                             elevation[x, y] = (byte)(GetElevationDifferenz() + elevation[x, y]);
                         else
                             elevation[x, y] = Byte.MinValue;
@@ -217,6 +228,20 @@ namespace NoiseTest
                                     + 0.25 * Noise.CalcPixel2D(x, y, 4 * scale)) / 1.75;    //1.75 ist wichtig um innerhalb der Grenzen eines Bytes zu bleiben
                                     //+ 0.43 * Noise.CalcPixel2D(x, y, 4 * scale)) / 1.75;
                     moisture[x, y] = (byte)mo;
+                    if (moistureDifferenz < 0)
+                    {
+                        if (moisture[x, y] >= Byte.MinValue - moistureDifferenz)
+                            moisture[x, y] = (byte)(moistureDifferenz + moisture[x, y]);
+                        else
+                            moisture[x, y] = Byte.MinValue;
+                    }
+                    else if (moistureDifferenz > 0)
+                    {
+                        if (moisture[x, y] <= Byte.MaxValue - moistureDifferenz)
+                            moisture[x, y] = (byte)(moistureDifferenz + moisture[x, y]);
+                        else
+                            moisture[x, y] = Byte.MaxValue;
+                    }
                 }
             }
         }
