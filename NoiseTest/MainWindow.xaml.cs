@@ -274,6 +274,7 @@ namespace NoiseTest
                     {
                         if (wert <= 100 && wert >= -100)
                         {
+                            Slider_LandschaftSt.Value = wert;
                             map.SetElevationDifferenz(wert);
                             map.GenerateElevation();
                             //map.DistributeTrees();
@@ -331,6 +332,46 @@ namespace NoiseTest
         {
             map.GenerateMoisture();
             drawMap();
+        }
+
+        private void TextBox_Feuchtigkeit_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Return)
+            {
+                if (new Regex(@"^[-]?\d+$").IsMatch(TextBox_Feuchtigkeit.Text)) // equals a number (negativ and/or with digits after a , or . )
+                {
+                    int wert;
+                    if (Int32.TryParse(TextBox_Feuchtigkeit.Text, out wert))
+                    {
+                        if (wert <= 100 && wert >= -100)
+                        {
+                            Slider_Feuchtigkeit.Value = wert;
+                            map.SetMoistureDifferent(wert);
+                            map.GenerateMoisture();
+                            if (islandCheck.IsChecked ?? false)
+                            {
+                                map.MakeIsland();
+                            }
+                            drawMap();
+                        }
+                        else
+                        {
+                            TextBox_Feuchtigkeit.Text = "0";
+                            MessageBox.Show("Diese Feld akzeptiert nur ganzzahlige Zahlen im Intervall von -100 bis 100", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                    else
+                    {
+                        TextBox_Feuchtigkeit.Text = "0";
+                        MessageBox.Show("Diese Feld akzeptiert nur ganzzahlige Zahlen im Intervall von -100 bis 100", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    TextBox_Feuchtigkeit.Text = "0";
+                    MessageBox.Show("Diese Feld akzeptiert nur ganzzahlige Zahlen im Intervall von -100 bis 100", "Warnung", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

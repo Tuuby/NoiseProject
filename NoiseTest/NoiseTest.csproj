@@ -103,5 +103,16 @@
   <ItemGroup>
     <Folder Include="System\Windows\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\water_down.jpg" />
+    <Resource Include="Icons\water_up.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\zoom+.png" />
+    <Resource Include="Icons\zoom-.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\zoom.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
