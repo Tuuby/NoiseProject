@@ -39,13 +39,14 @@
             <TextBox x:Name="TextBox_Feuchtigkeit" HorizontalAlignment="Left" Height="23" Margin="58,339,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyDown="TextBox_Feuchtigkeit_KeyDown" />
             <Image HorizontalAlignment="Left" Height="18" Margin="0,26,0,0" VerticalAlignment="Top" Width="18" Source="Icons/water_down.jpg"/>
             <Image HorizontalAlignment="Left" Height="18" Margin="0,119,0,0" VerticalAlignment="Top" Width="18" Source="Icons/zoom-.png"/>
-            <Image HorizontalAlignment="Left" Height="18" Margin="0,217,0,0" VerticalAlignment="Top" Width="18" Source="Icons/water_down.jpg"/>
-            <Image HorizontalAlignment="Left" Height="18" Margin="0,310,0,0" VerticalAlignment="Top" Width="18" Source="Icons/water_down.jpg"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="0,217,0,0" VerticalAlignment="Top" Width="20" Source="Icons/elevation_low.png"/>
+            <Image HorizontalAlignment="Left" Height="18" Margin="0,310,0,0" VerticalAlignment="Top" Width="18" Source="Icons/moisture_low.png"/>
             <Image HorizontalAlignment="Left" Height="18" Margin="275,26,-3,0" VerticalAlignment="Top" Width="18" Source="Icons/water_up.jpg" Grid.ColumnSpan="2"/>
             <Image HorizontalAlignment="Left" Height="18" Margin="274,119,0,0" VerticalAlignment="Top" Width="18" Source="Icons/zoom+.png"/>
-            <Image HorizontalAlignment="Left" Height="18" Margin="275,217,0,0" VerticalAlignment="Top" Width="18" Source="Icons/water_up.jpg"/>
-            <Image HorizontalAlignment="Left" Height="18" Margin="275,310,0,0" VerticalAlignment="Top" Width="18" Source="Icons/water_up.jpg"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="275,217,0,0" VerticalAlignment="Top" Width="20" Source="Icons/elevation_high.png"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="275,310,0,0" VerticalAlignment="Top" Width="20" Source="Icons/moisture_high.jpg"/>
         </Grid>
         <Button x:Name="Button_Speichern" Content="Speichern" HorizontalAlignment="Left" Margin="10,520,0,0" VerticalAlignment="Top" Width="128" Click="Button_Speichern_Click"/>
+        <Label Content="Copyrigth © 2019 MapZ - by Tobias Trompell, Tim Schreiner and Philipp Grigarzik" HorizontalAlignment="Center" Margin="209,0,209,37" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Width="446"/>
     </Grid>
 </Window>

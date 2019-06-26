@@ -114,5 +114,13 @@
   <ItemGroup>
     <Resource Include="Icons\zoom.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\moisture_high.jpg" />
+    <Resource Include="Icons\moisture_low.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\elevation_high.png" />
+    <Resource Include="Icons\elevation_low.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
