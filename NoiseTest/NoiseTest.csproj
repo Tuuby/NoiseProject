@@ -122,5 +122,12 @@
     <Resource Include="Icons\elevation_high.png" />
     <Resource Include="Icons\elevation_low.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\moisture_high2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\moisture_high3.png" />
+    <Resource Include="Icons\moisture_low2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

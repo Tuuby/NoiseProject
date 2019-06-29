@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoiseTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="873.5">
+        Title="MapZ" Height="800" Width="873.5">
     <Grid Height="800" Margin="0,0,2,-31">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="443*"/>
@@ -13,40 +13,40 @@
         </Grid.ColumnDefinitions>
         <!--<Canvas x:Name="MapCanvas" HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="500"/>-->
         <Image x:Name="mapView" HorizontalAlignment="Right" Height="500" VerticalAlignment="Top" Width="500" Margin="0,10,10,0" Grid.ColumnSpan="2"/>
-        <Grid Margin="10,10,0,732" HorizontalAlignment="Left" Width="218">
-            <Button x:Name="SeedRoll" Content="New Seed" HorizontalAlignment="Left" Margin="146,0,0,0" VerticalAlignment="Top" Width="69" Click="SeedRoll_Click" Height="23"/>
-            <TextBox x:Name="SeedEingabe" HorizontalAlignment="Left" Height="23" Margin="54,0,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="87" KeyDown="SeedEingabe_KeyDown"/>
-            <Label Content="Seed:" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="39"/>
-            <Button x:Name="GenerierKarte" Content="Generieren" HorizontalAlignment="Left" Height="26" Margin="54,28,0,0" VerticalAlignment="Top" Width="111" Click="GenerierKarte_Click"/>
+        <Grid Margin="19,21,0,702" HorizontalAlignment="Left" Width="296" Background="#FFB8B8B8">
+            <Button x:Name="SeedRoll" Content="New Seed" HorizontalAlignment="Left" Margin="146,10,0,0" VerticalAlignment="Top" Width="69" Click="SeedRoll_Click" Height="23"/>
+            <TextBox x:Name="SeedEingabe" HorizontalAlignment="Left" Height="23" Margin="54,10,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="87" KeyDown="SeedEingabe_KeyDown"/>
+            <Label Content="Seed:" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="39" Margin="11,6,0,0"/>
+            <Button x:Name="GenerierKarte" Content="Generieren" HorizontalAlignment="Left" Height="26" Margin="54,41,0,0" VerticalAlignment="Top" Width="111" Click="GenerierKarte_Click"/>
         </Grid>
-        <Grid Margin="10,107,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="373" Width="293">
+        <Grid Margin="19,123,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="479" Width="296" Background="#FFB8B8B8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
-            <CheckBox x:Name="islandCheck" Content="Insel" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="IslandCheck_Checked" Unchecked="IslandCheck_Unchecked" RenderTransformOrigin="4.477,-4.267" Height="15" Width="44"/>
-            <TextBox x:Name ="wl" Height="23" Margin="86,50,84,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" KeyDown="Wl_KeyDown" HorizontalAlignment="Center" IsReadOnlyCaretVisible="True"/>
-            <Slider x:Name ="Wasserlevel" Margin="28,26,26,0" VerticalAlignment="Top" Width="236" ValueChanged="Wasserlevel_ValueChanged" Thumb.DragCompleted="Wasserlevel_DragCompleted" Maximum="255" HorizontalAlignment="Center" TickPlacement="BottomRight" TickFrequency="100" Ticks="25 50 75 100" LargeChange="20" Value="20" Height="24"/>
-            <Label Content="Wasserlevel" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="88" HorizontalAlignment="Center" Margin="102,0,100,0" Height="26"/>
-            <Label Content="Skalierung" HorizontalAlignment="Center" Margin="110,88,108,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.512,0.5" HorizontalContentAlignment="Center" Height="26"/>
-            <TextBox x:Name ="Skalierung_Textbox" Height="23" Margin="86,148,84,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" KeyDown="Skalierung_Textbox_KeyDown" HorizontalAlignment="Center" IsReadOnlyCaretVisible="True"/>
-            <Slider x:Name="Skalierungslevel" HorizontalAlignment="Center" Margin="28,119,22,0" VerticalAlignment="Top" Width="240" TickPlacement="BottomRight" Ticks="1 2 3 4 5 6 7 8 9 10" ValueChanged="Skalierungslevel_ValueChanged" Thumb.DragCompleted="Skalierungslevel_DragCompleted" Maximum="5" Minimum="1" Height="24"/>
-            <Label x:Name="LandschaftSt" Content="Höhe" HorizontalAlignment="Center" Height="26" Margin="124,176,124,0" VerticalAlignment="Top" Width="42"/>
-            <TextBox x:Name="TextBox_LandschaftSt" HorizontalAlignment="Left" Height="23" Margin="58,246,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyDown="TextBox_LandschaftSt_KeyDown"/>
-            <Slider x:Name="Slider_LandschaftSt" HorizontalAlignment="Center" Margin="28,217,26,0" VerticalAlignment="Top" Width="236" TickPlacement="BottomRight" ValueChanged="Slider_LandschaftSt_ValueChanged" Thumb.DragCompleted="Slider_LandschaftSt_DragCompleted" Minimum="-100" Ticks="{x:Null}" TickFrequency="0" Maximum="100" LargeChange="10" Height="24"/>
-            <Label x:Name="label" Content="Feuchtigkeit" HorizontalAlignment="Left" Margin="82,279,0,0" VerticalAlignment="Top" Height="26" Width="75"/>
-            <Slider x:Name="Slider_Feuchtigkeit" HorizontalAlignment="Center" Margin="28,310,26,0" VerticalAlignment="Top" Width="236" TickPlacement="BottomRight" Minimum="-100" Ticks="{x:Null}" TickFrequency="0" Maximum="100" LargeChange="10" ValueChanged="Slider_Feuchtigkeit_ValueChanged" Thumb.DragCompleted="Slider_Feuchtigkeit_DragCompleted" Height="24"/>
-            <TextBox x:Name="TextBox_Feuchtigkeit" HorizontalAlignment="Left" Height="23" Margin="58,339,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyDown="TextBox_Feuchtigkeit_KeyDown" />
-            <Image HorizontalAlignment="Left" Height="18" Margin="0,26,0,0" VerticalAlignment="Top" Width="18" Source="Icons/water_down.jpg"/>
-            <Image HorizontalAlignment="Left" Height="18" Margin="0,119,0,0" VerticalAlignment="Top" Width="18" Source="Icons/zoom-.png"/>
-            <Image HorizontalAlignment="Left" Height="20" Margin="0,217,0,0" VerticalAlignment="Top" Width="20" Source="Icons/elevation_low.png"/>
-            <Image HorizontalAlignment="Left" Height="18" Margin="0,310,0,0" VerticalAlignment="Top" Width="18" Source="Icons/moisture_low.png"/>
-            <Image HorizontalAlignment="Left" Height="18" Margin="275,26,-3,0" VerticalAlignment="Top" Width="18" Source="Icons/water_up.jpg" Grid.ColumnSpan="2"/>
-            <Image HorizontalAlignment="Left" Height="18" Margin="274,119,0,0" VerticalAlignment="Top" Width="18" Source="Icons/zoom+.png"/>
-            <Image HorizontalAlignment="Left" Height="20" Margin="275,217,0,0" VerticalAlignment="Top" Width="20" Source="Icons/elevation_high.png"/>
-            <Image HorizontalAlignment="Left" Height="20" Margin="275,310,0,0" VerticalAlignment="Top" Width="20" Source="Icons/moisture_high.jpg"/>
+            <CheckBox x:Name="islandCheck" Content="Insel" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="IslandCheck_Checked" Unchecked="IslandCheck_Unchecked" RenderTransformOrigin="4.477,-4.267" Height="20" Width="52" Margin="30,9,0,0"/>
+            <TextBox x:Name ="wl" Height="23" Margin="88,81,85,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" KeyDown="Wl_KeyDown" HorizontalAlignment="Center" IsReadOnlyCaretVisible="True"/>
+            <Slider x:Name ="Wasserlevel" Margin="30,52,27,0" VerticalAlignment="Top" Width="236" ValueChanged="Wasserlevel_ValueChanged" Thumb.DragCompleted="Wasserlevel_DragCompleted" Maximum="255" HorizontalAlignment="Center" TickPlacement="BottomRight" TickFrequency="100" Ticks="25 50 75 100" LargeChange="20" Value="20" Height="24"/>
+            <Label Content="Wasserlevel" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="88" HorizontalAlignment="Center" Margin="104,21,101,0" Height="26"/>
+            <Label Content="Skalierung" HorizontalAlignment="Center" Margin="112,143,109,0" VerticalAlignment="Top" Width="72" RenderTransformOrigin="0.512,0.5" HorizontalContentAlignment="Center" Height="26"/>
+            <TextBox x:Name ="Skalierung_Textbox" Height="23" Margin="88,203,85,0" TextWrapping="Wrap" Text ="0" VerticalAlignment="Top" Width="120" KeyDown="Skalierung_Textbox_KeyDown" HorizontalAlignment="Center" IsReadOnlyCaretVisible="True"/>
+            <Slider x:Name="Skalierungslevel" HorizontalAlignment="Center" Margin="30,174,23,0" VerticalAlignment="Top" Width="240" TickPlacement="BottomRight" Ticks="1 2 3 4 5 6 7 8 9 10" ValueChanged="Skalierungslevel_ValueChanged" Thumb.DragCompleted="Skalierungslevel_DragCompleted" Maximum="5" Minimum="1" Height="24"/>
+            <Label x:Name="LandschaftSt" Content="Höhe" HorizontalAlignment="Center" Height="26" Margin="126,262,125,0" VerticalAlignment="Top" Width="42"/>
+            <TextBox x:Name="TextBox_LandschaftSt" HorizontalAlignment="Left" Height="23" Margin="88,322,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyDown="TextBox_LandschaftSt_KeyDown"/>
+            <Slider x:Name="Slider_LandschaftSt" HorizontalAlignment="Center" Margin="30,293,27,0" VerticalAlignment="Top" Width="236" TickPlacement="BottomRight" ValueChanged="Slider_LandschaftSt_ValueChanged" Thumb.DragCompleted="Slider_LandschaftSt_DragCompleted" Minimum="-100" Ticks="{x:Null}" TickFrequency="0" Maximum="100" LargeChange="10" Height="24"/>
+            <Label x:Name="label" Content="Feuchtigkeit" HorizontalAlignment="Left" Margin="110,386,0,0" VerticalAlignment="Top" Height="26" Width="74"/>
+            <Slider x:Name="Slider_Feuchtigkeit" HorizontalAlignment="Center" Margin="30,417,27,0" VerticalAlignment="Top" Width="236" TickPlacement="BottomRight" Minimum="-100" Ticks="{x:Null}" TickFrequency="0" Maximum="100" LargeChange="10" ValueChanged="Slider_Feuchtigkeit_ValueChanged" Thumb.DragCompleted="Slider_Feuchtigkeit_DragCompleted" Height="24"/>
+            <TextBox x:Name="TextBox_Feuchtigkeit" HorizontalAlignment="Left" Height="23" Margin="88,446,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" KeyDown="TextBox_Feuchtigkeit_KeyDown" />
+            <Image HorizontalAlignment="Left" Height="18" Margin="4,58,0,0" VerticalAlignment="Top" Width="18" Source="Icons/water_down.jpg"/>
+            <Image HorizontalAlignment="Left" Height="18" Margin="4,180,0,0" VerticalAlignment="Top" Width="18" Source="Icons/zoom-.png"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="4,297,0,0" VerticalAlignment="Top" Width="20" Source="Icons/elevation_low.png"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="4,421,0,0" VerticalAlignment="Top" Width="20" Source="Icons/moisture_low2.png"/>
+            <Image HorizontalAlignment="Left" Height="18" Margin="275,58,0,0" VerticalAlignment="Top" Width="18" Source="Icons/water_up.jpg"/>
+            <Image HorizontalAlignment="Left" Height="18" Margin="275,180,0,0" VerticalAlignment="Top" Width="18" Source="Icons/zoom+.png"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="275,297,-2,0" VerticalAlignment="Top" Width="20" Source="Icons/elevation_high.png" Grid.ColumnSpan="2"/>
+            <Image HorizontalAlignment="Left" Height="20" Margin="275,421,-2,0" VerticalAlignment="Top" Width="20" Source="Icons/moisture_high3.png" Grid.ColumnSpan="2"/>
         </Grid>
-        <Button x:Name="Button_Speichern" Content="Speichern" HorizontalAlignment="Left" Margin="10,520,0,0" VerticalAlignment="Top" Width="128" Click="Button_Speichern_Click"/>
-        <Label Content="Copyrigth © 2019 MapZ - by Tobias Trompell, Tim Schreiner and Philipp Grigarzik" HorizontalAlignment="Center" Margin="209,0,209,37" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Width="446"/>
+        <Button x:Name="Button_Speichern" Content="Speichern" HorizontalAlignment="Left" Margin="72,641,0,0" VerticalAlignment="Top" Width="184" Click="Button_Speichern_Click"/>
+        <Label Content="Copyright © 2019 MapZ - by Tobias Trompell, Tim Schreiner and Philipp Grigarzik" HorizontalAlignment="Center" Margin="209,0,209,37" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Width="446"/>
     </Grid>
 </Window>
